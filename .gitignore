@@ -6,3 +6,4 @@ __pycache__/
 data/chroma/
 data/*.db
 .DS_Store
+data/*.pdf
