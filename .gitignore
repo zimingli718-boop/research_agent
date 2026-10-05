@@ -7,3 +7,12 @@ data/chroma/
 data/*.db
 .DS_Store
 data/*.pdf
+# 模型文件（2GB+，不提交）
+models/
+
+# 数据文件（可重新生成）
+data/parsed/
+data/uploads/
+data/bm25_index.pkl
+data/chroma/
+data/*.db

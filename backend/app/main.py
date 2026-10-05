@@ -10,6 +10,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from app.api import upload
+app.include_router(upload.router, prefix="/api")
+
 @app.get("/health")
 async def health():
     return {"status": "ok", "message": "Research Agent backend is running"}
