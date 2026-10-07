@@ -10,6 +10,7 @@ from services.pdf_parser import PDFParser
 from services.structure_extractor import StructureExtractor
 from services.chunker import Chunker
 from services.bm25_retriever import BM25Retriever
+from services.deduplicator import Deduplicator
 from models.database import SessionLocal, Paper, Chunk
 
 router = APIRouter()
@@ -19,9 +20,29 @@ parser = PDFParser(output_dir="E:/research_agent/data/parsed")
 extractor = StructureExtractor()
 chunker = Chunker()
 bm25 = BM25Retriever()
+deduplicator = Deduplicator()
 
 UPLOAD_DIR = "E:/research_agent/data/uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+
+def assign_section_path(chunks, headings, paper_id):
+    """为每个 chunk 推断所属的 section_path"""
+    metadatas = []
+    for i, chunk in enumerate(chunks):
+        section_path = ""
+        for h in headings:
+            if h["title"] in chunk[:200]:
+                section_path = h["title"]
+                break
+        if not section_path and metadatas:
+            section_path = metadatas[-1]["section_path"]
+        metadatas.append({
+            "paper_id": paper_id,
+            "chunk_index": i,
+            "section_path": section_path,
+        })
+    return metadatas
 
 
 @router.post("/upload")
@@ -45,16 +66,33 @@ async def upload_pdf(file: UploadFile = File(...)):
     # 3. 结构化抽取
     structure = extractor.extract(parse_result["markdown"])
 
-    # 4. 分块 + 向量化
-    chunks = chunker.chunk_text(parse_result["markdown"])
-    metadatas = [
-        {
-            "paper_id": parse_result["paper_id"],
-            "chunk_index": i,
-            "section_path": "",
+    # 3.5 语义去重检测
+    db_check = SessionLocal()
+    try:
+        existing_papers = [
+            {"id": p.id, "title": p.title, "abstract": p.abstract}
+            for p in db_check.query(Paper).all()
+            if p.abstract
+        ]
+    finally:
+        db_check.close()
+
+    dup_result = deduplicator.check_duplicate(structure["abstract"], existing_papers)
+
+    if dup_result["is_duplicate"]:
+        return {
+            "status": "duplicate_detected",
+            "similarity": round(dup_result["similarity"], 4),
+            "matched_paper_id": dup_result["matched_paper"]["id"],
+            "matched_paper_title": dup_result["matched_paper"]["title"],
+            "message": f"库中已有高度相似的论文（相似度 {dup_result['similarity']:.2%}），建议保留已有版本",
+            "suggested_action": "keep_existing",
+            "new_paper_id": parse_result["paper_id"],
         }
-        for i in range(len(chunks))
-    ]
+
+    # 4. 分块 + 向量化（带 section_path 推断）
+    chunks = chunker.chunk_text(parse_result["markdown"])
+    metadatas = assign_section_path(chunks, structure["headings"], parse_result["paper_id"])
     chunk_ids = chunker.add_chunks(parse_result["paper_id"], chunks, metadatas)
 
     # 5. 更新 BM25 索引（增量追加）
@@ -84,7 +122,6 @@ async def upload_pdf(file: UploadFile = File(...)):
                 chunk_index=i,
             ))
         db.commit()
-        # 在 close 之前取出需要的值
         paper_title = paper.title
     finally:
         db.close()
