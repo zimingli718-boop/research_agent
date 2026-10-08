@@ -11,7 +11,10 @@ app.add_middleware(
 )
 
 from app.api import upload
+from app.api import qa
 app.include_router(upload.router, prefix="/api")
+app.include_router(qa.router, prefix="/api")
+
 
 @app.get("/health")
 async def health():
