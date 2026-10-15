@@ -57,7 +57,7 @@ async def upload_pdf(file: UploadFile = File(...)):
     print(f"[Upload] 文件已保存: {file_path}")
 
     try:
-        parse_result = parser.parse_flash(file_path)
+        parse_result = parser.parse_auto(file_path)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"PDF 解析失败: {str(e)}")
 
