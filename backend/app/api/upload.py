@@ -214,7 +214,6 @@ async def get_paper_references(paper_id: str):
         with open(paper.markdown_path, "r", encoding="utf-8") as f:
             markdown = f.read()
 
-        # 1. 从 Markdown 提取 References 列表
         ref_match = re.search(r'^#+\s*References\s*$', markdown, re.MULTILINE | re.IGNORECASE)
         refs = []
         if ref_match:
@@ -230,12 +229,10 @@ async def get_paper_references(paper_id: str):
                 ref_text = re.sub(r'\s+', ' ', ref_text)[:300]
                 refs.append({"num": ref_num, "text": ref_text})
 
-        # 2. 用 PyMuPDF 定位 References 章节起始页
         locator = PDFLocator(paper.file_path)
         ref_section_loc = locator.locate_ref_section()
         ref_page = ref_section_loc["page"] if ref_section_loc else None
 
-        # 3. 排除 References 页及之后的所有页（References 通常从 ref_page 开始到文档末尾）
         exclude_pages = []
         if ref_page:
             exclude_pages = list(range(ref_page, locator.doc.page_count + 1))
@@ -243,7 +240,6 @@ async def get_paper_references(paper_id: str):
         max_num = max([r["num"] for r in refs], default=0) + 5
         citations = locator.locate_citations(max_ref_num=max_num, exclude_pages=exclude_pages)
 
-        # 4. 组装结果
         for ref in refs:
             num_str = str(ref["num"])
             locs = citations.get(num_str, [])
@@ -257,6 +253,40 @@ async def get_paper_references(paper_id: str):
             "paper_id": paper_id,
             "references": refs,
             "ref_section_page": ref_page,
+        }
+    finally:
+        db.close()
+
+
+@router.get("/papers/{paper_id}/page/{page_num}")
+async def get_paper_page_text(paper_id: str, page_num: int):
+    """获取论文指定页的文本（PyMuPDF 精确提取该页文字）"""
+    db = SessionLocal()
+    try:
+        paper = db.query(Paper).filter(Paper.id == paper_id).first()
+        if not paper:
+            raise HTTPException(status_code=404, detail="论文不存在")
+
+        if not os.path.exists(paper.file_path):
+            raise HTTPException(status_code=404, detail="PDF 文件不存在")
+
+        import pymupdf
+        doc = pymupdf.open(paper.file_path)
+        if page_num < 1 or page_num > doc.page_count:
+            doc.close()
+            raise HTTPException(status_code=400, detail="页码超出范围")
+
+        page = doc[page_num - 1]
+        page_text = page.get_text()
+        doc.close()
+
+        page_text = re.sub(r'\n{3,}', '\n\n', page_text).strip()
+
+        return {
+            "paper_id": paper_id,
+            "page_num": page_num,
+            "text": page_text[:5000],
+            "format": "plain",
         }
     finally:
         db.close()
