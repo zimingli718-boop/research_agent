@@ -1,0 +1,95 @@
+{
+  "query": "transformer",
+  "results": [
+    {
+      "id": "2610.20610v1",
+      "title": "Can Learning to Answer Spatial Questions Improve Novel-View Generation?",
+      "authors": [
+        "Jahyeok Koo",
+        "Hyeonseo Yu",
+        "Seungho Jang",
+        "Jaewoo Jung",
+        "Jiwon Kang",
+        "Seokju Cho",
+        "Seungryong Kim"
+      ],
+      "abstract": "Generating novel views from limited observations requires preserving both the appearance and spatial structure of a scene. Although recent approaches exploit fine-grained geometric cues, they do not explicitly model high-level semantic and spatial properties such as object identity, attributes, and inter-object relationships. In this work, we investigate whether 3D language understanding can provide complementary supervision for novel-view generation. We introduce Ask4NV, built on a pretrained unified multimodal model with a Mixture-of-Transformers (MoT) architecture. Our model incorporates camera geometry into both VAE and ViT representations and leverages understanding features during generation through joint self-attention with a modality-aware attention masking strategy. Experiments demonstrate strong image quality and geometric consistency in novel-view generation, alongside competitive 3D language understanding. Further analysis shows that joint training improves cross-view correspondence in VAE representations and similarity in a 3D-aware feature space.",
+      "published": "2026-10-14T17:59:58Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20610v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20610v1"
+    },
+    {
+      "id": "2610.20606v1",
+      "title": "Modeling and Understanding Neural Weights of Humanoid Policies with Diffusion",
+      "authors": [
+        "Huixuan Cheng",
+        "Bike Zhang",
+        "Shankar Sastry",
+        "Koushil Sreenath"
+      ],
+      "abstract": "Recent advances in robot learning have driven rapid progress in humanoid control, enabling increasingly agile behaviors in the real world. However, humanoid control networks are typically obtained through conventional training procedures, while comparatively little attention has been given to directly modeling the distribution of their learned weights and generating functional networks in weight space. In this work, we investigate whether high-performing humanoid control networks can be generatively modeled directly through their weights. We adopt a latent diffusion framework that couples a linear autoencoder with a Diffusion Transformer. The autoencoder compresses actor network parameters into a compact latent space, and the Diffusion Transformer models the distribution of these latents. Trained on networks collected from reinforcement learning for the Unitree G1 robot, our approach generates deployable networks that perform various motions in the real world, including walking, dancing, and spin kick. Beyond generation, we further study the learned weight space to better understand the structure captured by these humanoid control networks. We identify a structural principle in the first-layer weights that consistently reflects the robot's kinematic prior. Notably, this kinematic prior emerges under both Reinforcement Learning (RL) and Imitation Learning (IL) training, suggesting that it is not specific to a particular optimization process but may instead reflect common knowledge associated with humanoid embodiment. Together, these results demonstrate the feasibility of generative modeling in humanoid network weight space, while providing initial insights into the information encoded by their learned weights. Additional results are available on our project website: https://humanoid-weight-diffusion.github.io/",
+      "published": "2026-10-14T17:59:52Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20606v1",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20606v1"
+    },
+    {
+      "id": "2610.20608v1",
+      "title": "Representation Conditioning for Generation",
+      "authors": [
+        "Saeed Razavi",
+        "Xingjian Leng",
+        "Liang Zheng"
+      ],
+      "abstract": "Representation-alignment methods effectively accelerate the diffusion transformer training. REPA, for example, uses a pretrained vision encoder to supervise an intermediate layer through an MLP projection head which is discarded after training. It aims to import semantics from the vision encoder to the diffusion backbone. While this objective is achieved at early layers by back-propagating the alignment loss, there is no guarantee that later layers, supervised by the velocity prediction loss alone, can well access such semantics. We propose a simple solution, representation conditioning (RECON), to improve semantics in later layers. During training, we feed the pretrained vision encoder tokens into later layers; during inference, because we no longer have the clean image, we reuse the MLP head (as a proxy to the vision encoder) and project its output tokens to the later layers. Our method adds no parameters and leads to much faster convergence: RECON is $63\\times$ faster than SiT and $25\\times$ faster than REPA. Code is available at https://github.com/saeidrazavi/RECON",
+      "published": "2026-10-14T17:59:52Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20608v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20608v1"
+    },
+    {
+      "id": "2610.20596v1",
+      "title": "CoWear: Towards Collaborative Wearable Inertial Localization with Multiple Smart Devices",
+      "authors": [
+        "Zhuoyuan She",
+        "Zhanpeng Zhang",
+        "Yapeng Chen",
+        "Jiale Wang",
+        "Xin Xie",
+        "Ming Xia"
+      ],
+      "abstract": "Consumer smart devices observe the same human motion from different body locations, yet existing inertial-localization benchmarks rarely provide synchronized heterogeneous wearables with device-specific motion ground truth. We present CoWear, a dataset and reference framework for collaborative inertial localization using a smartphone, smartwatch, and smart glasses. The dataset contains over 30 participants, over 300 walking sessions, and more than 30 hours and 100 km of aggregate device trajectories, with each device individually tracked by motion capture. To enable collaboration across distinct body motions, we train role-specific estimators to predict the displacement of a common reference device over synchronized temporal windows. Their predictions are transformed to the world frame using gyroscope integration and fused according to learned uncertainty. Experiments using phone, glasses, and watch as reference targets show that multi-device fusion consistently improves both displacement and trajectory rollout accuracy over individual-device estimation. CoWear provides a dataset and reproducible baseline for studying collaborative inertial localization across heterogeneous consumer wearables.",
+      "published": "2026-10-14T17:59:19Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20596v1",
+      "categories": [
+        "cs.RO"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20596v1"
+    },
+    {
+      "id": "2610.20595v1",
+      "title": "Landau quantization of $C_3$ high-fold fermions in honeycomb lattices",
+      "authors": [
+        "Luisa Madail",
+        "Joaquín Fernández-Rossier"
+      ],
+      "abstract": "We present the theory of the Landau levels of $C_3$ high-fold fermions in honeycomb lattices. These fermions arise as a generalization of the tight-binding model in a honeycomb lattice with one orbital per site, known to describe graphene, to a family of models with several orbitals per site transforming according to representations of $C_3$, relevant for triangulene two-dimensional crystals. The models are defined by the number of orbitals $n_a$ and $n_b$ at the $a$ and $b$ sites of the unit cell. They feature energy bands that combine flat bands and Dirac cones, that are isomorphic to those of graphene, the Lieb, $p_{xy}$ honeycomb, and the Kagome tight-binding models. Combining tight-binding and $k\\cdot p$ methods, here we compute the Landau levels of the $(1,1)$, $(1,2)$, $(2,2)$ and $(3,3)$ models, we compare them to those of the reference models, and we explore the similarities and differences with the Landau levels in graphene. Our findings reveal that the nature of $C_3$ high-fold fermions combine Dirac-type Landau quantization, originating from the linear crossings and associated relativistic band dispersion, with anomalous Landau quantization rooted in the quantum geometry of the singular flat bands.",
+      "published": "2026-10-14T17:59:14Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20595v1",
+      "categories": [
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20595v1"
+    }
+  ]
+}

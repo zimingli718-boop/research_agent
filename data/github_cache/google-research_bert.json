@@ -1,0 +1,10 @@
+{
+  "exists": true,
+  "repo": "google-research/bert",
+  "stars": 40038,
+  "forks": 9659,
+  "last_push": "2024-07-23T23:39:41Z",
+  "description": "TensorFlow code and pre-trained models for BERT",
+  "language": "Python",
+  "html_url": "https://github.com/google-research/bert"
+}

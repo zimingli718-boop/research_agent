@@ -1,0 +1,10 @@
+{
+  "exists": true,
+  "repo": "huggingface/transformers",
+  "stars": 167717,
+  "forks": 34872,
+  "last_push": "2026-10-15T13:48:18Z",
+  "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
+  "language": "Python",
+  "html_url": "https://github.com/huggingface/transformers"
+}

@@ -1,0 +1,269 @@
+{
+  "query": "transformer",
+  "results": [
+    {
+      "id": "2610.20610v1",
+      "title": "Can Learning to Answer Spatial Questions Improve Novel-View Generation?",
+      "authors": [
+        "Jahyeok Koo",
+        "Hyeonseo Yu",
+        "Seungho Jang",
+        "Jaewoo Jung",
+        "Jiwon Kang",
+        "Seokju Cho",
+        "Seungryong Kim"
+      ],
+      "abstract": "Generating novel views from limited observations requires preserving both the appearance and spatial structure of a scene. Although recent approaches exploit fine-grained geometric cues, they do not explicitly model high-level semantic and spatial properties such as object identity, attributes, and inter-object relationships. In this work, we investigate whether 3D language understanding can provide complementary supervision for novel-view generation. We introduce Ask4NV, built on a pretrained unified multimodal model with a Mixture-of-Transformers (MoT) architecture. Our model incorporates camera geometry into both VAE and ViT representations and leverages understanding features during generation through joint self-attention with a modality-aware attention masking strategy. Experiments demonstrate strong image quality and geometric consistency in novel-view generation, alongside competitive 3D language understanding. Further analysis shows that joint training improves cross-view correspondence in VAE representations and similarity in a 3D-aware feature space.",
+      "published": "2026-10-14T17:59:58Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20610v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20610v1"
+    },
+    {
+      "id": "2610.20606v1",
+      "title": "Modeling and Understanding Neural Weights of Humanoid Policies with Diffusion",
+      "authors": [
+        "Huixuan Cheng",
+        "Bike Zhang",
+        "Shankar Sastry",
+        "Koushil Sreenath"
+      ],
+      "abstract": "Recent advances in robot learning have driven rapid progress in humanoid control, enabling increasingly agile behaviors in the real world. However, humanoid control networks are typically obtained through conventional training procedures, while comparatively little attention has been given to directly modeling the distribution of their learned weights and generating functional networks in weight space. In this work, we investigate whether high-performing humanoid control networks can be generatively modeled directly through their weights. We adopt a latent diffusion framework that couples a linear autoencoder with a Diffusion Transformer. The autoencoder compresses actor network parameters into a compact latent space, and the Diffusion Transformer models the distribution of these latents. Trained on networks collected from reinforcement learning for the Unitree G1 robot, our approach generates deployable networks that perform various motions in the real world, including walking, dancing, and spin kick. Beyond generation, we further study the learned weight space to better understand the structure captured by these humanoid control networks. We identify a structural principle in the first-layer weights that consistently reflects the robot's kinematic prior. Notably, this kinematic prior emerges under both Reinforcement Learning (RL) and Imitation Learning (IL) training, suggesting that it is not specific to a particular optimization process but may instead reflect common knowledge associated with humanoid embodiment. Together, these results demonstrate the feasibility of generative modeling in humanoid network weight space, while providing initial insights into the information encoded by their learned weights. Additional results are available on our project website: https://humanoid-weight-diffusion.github.io/",
+      "published": "2026-10-14T17:59:52Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20606v1",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20606v1"
+    },
+    {
+      "id": "2610.20608v1",
+      "title": "Representation Conditioning for Generation",
+      "authors": [
+        "Saeed Razavi",
+        "Xingjian Leng",
+        "Liang Zheng"
+      ],
+      "abstract": "Representation-alignment methods effectively accelerate the diffusion transformer training. REPA, for example, uses a pretrained vision encoder to supervise an intermediate layer through an MLP projection head which is discarded after training. It aims to import semantics from the vision encoder to the diffusion backbone. While this objective is achieved at early layers by back-propagating the alignment loss, there is no guarantee that later layers, supervised by the velocity prediction loss alone, can well access such semantics. We propose a simple solution, representation conditioning (RECON), to improve semantics in later layers. During training, we feed the pretrained vision encoder tokens into later layers; during inference, because we no longer have the clean image, we reuse the MLP head (as a proxy to the vision encoder) and project its output tokens to the later layers. Our method adds no parameters and leads to much faster convergence: RECON is $63\\times$ faster than SiT and $25\\times$ faster than REPA. Code is available at https://github.com/saeidrazavi/RECON",
+      "published": "2026-10-14T17:59:52Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20608v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20608v1"
+    },
+    {
+      "id": "2610.20596v1",
+      "title": "CoWear: Towards Collaborative Wearable Inertial Localization with Multiple Smart Devices",
+      "authors": [
+        "Zhuoyuan She",
+        "Zhanpeng Zhang",
+        "Yapeng Chen",
+        "Jiale Wang",
+        "Xin Xie",
+        "Ming Xia"
+      ],
+      "abstract": "Consumer smart devices observe the same human motion from different body locations, yet existing inertial-localization benchmarks rarely provide synchronized heterogeneous wearables with device-specific motion ground truth. We present CoWear, a dataset and reference framework for collaborative inertial localization using a smartphone, smartwatch, and smart glasses. The dataset contains over 30 participants, over 300 walking sessions, and more than 30 hours and 100 km of aggregate device trajectories, with each device individually tracked by motion capture. To enable collaboration across distinct body motions, we train role-specific estimators to predict the displacement of a common reference device over synchronized temporal windows. Their predictions are transformed to the world frame using gyroscope integration and fused according to learned uncertainty. Experiments using phone, glasses, and watch as reference targets show that multi-device fusion consistently improves both displacement and trajectory rollout accuracy over individual-device estimation. CoWear provides a dataset and reproducible baseline for studying collaborative inertial localization across heterogeneous consumer wearables.",
+      "published": "2026-10-14T17:59:19Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20596v1",
+      "categories": [
+        "cs.RO"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20596v1"
+    },
+    {
+      "id": "2610.20595v1",
+      "title": "Landau quantization of $C_3$ high-fold fermions in honeycomb lattices",
+      "authors": [
+        "Luisa Madail",
+        "Joaquín Fernández-Rossier"
+      ],
+      "abstract": "We present the theory of the Landau levels of $C_3$ high-fold fermions in honeycomb lattices. These fermions arise as a generalization of the tight-binding model in a honeycomb lattice with one orbital per site, known to describe graphene, to a family of models with several orbitals per site transforming according to representations of $C_3$, relevant for triangulene two-dimensional crystals. The models are defined by the number of orbitals $n_a$ and $n_b$ at the $a$ and $b$ sites of the unit cell. They feature energy bands that combine flat bands and Dirac cones, that are isomorphic to those of graphene, the Lieb, $p_{xy}$ honeycomb, and the Kagome tight-binding models. Combining tight-binding and $k\\cdot p$ methods, here we compute the Landau levels of the $(1,1)$, $(1,2)$, $(2,2)$ and $(3,3)$ models, we compare them to those of the reference models, and we explore the similarities and differences with the Landau levels in graphene. Our findings reveal that the nature of $C_3$ high-fold fermions combine Dirac-type Landau quantization, originating from the linear crossings and associated relativistic band dispersion, with anomalous Landau quantization rooted in the quantum geometry of the singular flat bands.",
+      "published": "2026-10-14T17:59:14Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20595v1",
+      "categories": [
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20595v1"
+    },
+    {
+      "id": "2610.20592v1",
+      "title": "GeoThinker-$F$: Endogenous Predictive World Representations for Fast Spatial Intelligence",
+      "authors": [
+        "Haoyuan Li",
+        "Qihang Cao",
+        "Huanyuan Zhou",
+        "Xin Hu",
+        "Sijia Chen",
+        "Zihan Guo",
+        "Kun Xiang",
+        "Yunshuang Nie",
+        "Tao Tang",
+        "Xinlong Zheng",
+        "Jia-Wang Bian",
+        "Xianming Liu",
+        "Xiaodan Liang"
+      ],
+      "abstract": "Existing geometry-aware Multimodal Large Language Models (MLLMs) increasingly rely on external 3D encoders to provide structural priors, but executing these additional encoder paths at inference introduces substantial latency and computational overhead. We propose GeoThinker-$F$, an efficient framework that internalizes spatiotemporal perception by transforming causal MLLM hidden states into predictive latent world representations. Our key insight is that intermediate semantic representations contain sufficient information to predict useful representations of current geometry and future semantics, without requiring an exact reproduction of features from a dedicated 3D encoder. To realize this idea, GeoThinker-$F$ adopts a decoupled two-stage training strategy. In the first stage, the MLLM backbone is frozen while lightweight Latent Frame Prediction (LFP) heads learn from an offline 3D geometry expert and next-frame semantic targets. In the second stage, the external expert is removed, and the model is jointly optimized to generate and selectively integrate its self-predicted priors through a specialized Spatial-Grounded Temporal (SGT) Fusion module. Extensive evaluations show that GeoThinker-$F$ eliminates runtime dependence on external 3D geometry encoders while maintaining competitive performance across diverse spatial intelligence benchmarks. It achieves up to a $3.6\\times$ inference speedup, reducing latency from $1.45\\,\\mathrm{s}$ to $0.40\\,\\mathrm{s}$ while retaining strong spatial reasoning performance.",
+      "published": "2026-10-14T17:59:03Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20592v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20592v1"
+    },
+    {
+      "id": "2610.20588v1",
+      "title": "Your Transformer Is Secretly Elastic",
+      "authors": [
+        "Walter Simoncini",
+        "Dheeraj Varghese",
+        "Gertjan J. Burghouts",
+        "Cees G. M. Snoek"
+      ],
+      "abstract": "Scaling up transformers has produced models with broad capabilities, deployed across heterogeneous hardware and fluctuating workloads. Yet, model families offer only a few fixed sizes (e.g., S, B, L), forcing users to commit to a model based on hardware and latency constraints. This rigidity is often suboptimal under varying query loads. We introduce a retraining-free method that elastifies pre-trained transformers into a single model that adapts on-the-fly across a continuum of computational budgets. Our key contribution is a differentiable relaxation of the functional unit-ranking problem: unlike prior work, which optimizes a single importance weight per MLP block or attention head, we rank every individual MLP neuron and attention head jointly, on a common scale, by minimizing the model's loss under soft pruning across many sparsity targets, all at once. Across 27 vision and text transformer encoders ranging from 22M to 8B parameters, our method yields smooth degradation up to 60% sparsity and outperforms one-shot baselines under deep pruning. For example, pruning DINOv3 ViT-H+/16 to 50% sparsity removes 427M parameters while reducing ImageNet-1k linear-probing accuracy by only 0.8%, without the need for weight correction or retraining. At 60% sparsity, a pruned AugReg ViT-B/16 model achieves up to $1.80\\times$ higher throughput and $1.26\\times$ lower single-query latency on an A100 GPU. Elastic models are produced in minutes, with construction time scaling sub-linearly with parameter count.",
+      "published": "2026-10-14T17:58:08Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20588v1",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20588v1"
+    },
+    {
+      "id": "2610.20586v1",
+      "title": "Continuum Attention",
+      "authors": [
+        "Afshin Khadangi"
+      ],
+      "abstract": "We introduce Continuum Attention (CA), a causal Transformer attention operator that replaces discrete key and value lookup with integration over a continuous, piecewise linear memory curve. Each query induces an exponential relevance density along the curve. Integrating the density and interpolated values yields exact normalized attention from closed form exponential moments, including half token boundary contributions. The gradients follow analytically from moments of order at most two, enabling parallel GPU implementations while retaining quadratic sequence complexity and the standard Transformer decoder. Compared with ordinary softmax and focal attention, CA reduces mean validation negative log likelihood by 0.0200 and 0.0480 nats per byte, respectively, winning all paired comparisons. An additional disjoint validation slice yields a 0.0457 nats per byte advantage over the strongest selected softmax baseline, with a paired 95% confidence interval. These findings motivate continuous integration as a promising attention alternative while leaving larger scale generalization open.",
+      "published": "2026-10-14T17:57:40Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20586v1",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20586v1"
+    },
+    {
+      "id": "2610.20585v1",
+      "title": "Learnable Hodge-Laplacian Driven Mixture of Experts for Steady-PDE Surrogates on Coarse Unstructured Meshes",
+      "authors": [
+        "Stavros Nousias",
+        "Akis Nousias",
+        "Konstantinos Gkrispanis"
+      ],
+      "abstract": "Current approaches for steady partial differential equations surrogate models on unstructured meshes apply a single mixing mechanism to the whole solution. This paper proposes an architecture that partitions the solution among vanilla transformer experts, each focused on a different spectral scale. The partition is built from a discrete Hodge Laplacian $L_0=\\star_0^{-1} d_0^{\\top}\\star_1 d_0$, that serves as a fitting layer measuring high-frequency content. A gating mechanism takes the mesh as input and produces the per-vertex weights that recombine the expert outputs. AirFRANS is a steady Reynolds-averaged Navier--Stokes (RANS) airfoil benchmark. We evaluate our approach in a reduced remeshed version of the benchmark with each unstructured mesh counting 9.6K faces and 4.9K vertices. We compare our approach with the Transolver on the same dataset and dataset slit. Our approach reduces relative $L_2$ error by 31\\% and interior mean squared error by 47\\%.",
+      "published": "2026-10-14T17:57:24Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20585v1",
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20585v1"
+    },
+    {
+      "id": "2610.20567v1",
+      "title": "Prioritizing Microservice Requests via Retries",
+      "authors": [
+        "Ofek Lavi",
+        "Jhonatan Tavori",
+        "Hanoch Levy",
+        "Anat Bremler-Barr"
+      ],
+      "abstract": "Cloud services rapidly shift towards independently-managed microservices architectures. This independence may lead to temporary microservices miscoordination, resulting in overloads and rejections of valuable transactions. This weakness may further be exploited by attackers to launch overload attacks inflicting performance and cost damages.   Retry operations are a key machinery aiming at overcoming seldom rejections. However, during overload periods they: a) Fail protecting valuable transactions from rejections, and b) Trigger large-scale performance-degrading retry storms.   We propose simple modifications in retry operations, overcoming these deficiencies by transforming retries into a rejection prioritization mechanism, DiffTry (Differential Retries). It is based on a simple, lightweight, distributed and stateless design and requires neither overload sensing nor microservices coordination.   We develop an analytical model capturing DiffTry's effectiveness for two services in tandem, then generalize it to networks of services. Our theoretical framework lets practitioners quantify, for a given network, the resulting prioritization and rejection rates, and yields formal guarantees that DiffTry substantially reduces the impact of both incidental and adversarial orchestrated overloads. We validate these predictions in simulation and on a live Kubernetes deployment, where DiffTry is a simple drop-in service-mesh plugin requiring no application changes; the measured rejection closely matches the analysis.",
+      "published": "2026-10-14T17:51:58Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20567v1",
+      "categories": [
+        "cs.NI",
+        "cs.CR",
+        "cs.DC"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20567v1"
+    },
+    {
+      "id": "2610.20557v1",
+      "title": "Binary-lens amplification of starlight: from magnification flares to quasi-periodic tracking of orbital evolution",
+      "authors": [
+        "Hanxi Wang",
+        "Bence Kocsis",
+        "Miguel Zumalacárregui"
+      ],
+      "abstract": "Supermassive black hole binaries (SMBHB) are expected at the center of galaxies as a result of galaxy mergers. The dynamics and evolution of SMBHBs shed light on the evolution and formation of galaxies, the gravitational wave background and the nature of gravity. Many methods have been proposed to identify sub-parsec SMBHBs via the detection of gravitational waves or the modulation of the emission from the surrounding gaseous environment. In a previous study, we proposed a new method of identifying SMBHBs in non-active galactic nuclei via gravitational lensing. The caustics, i.e. the source positions with a divergent magnification, exhibit a complex extended geometry which rotates with the binary period. Each caustic-crossing produces an extreme magnification by up to a factor of $10^{6}$. In this work, we generalize the previous study and describe the rich phenomenology of binary-lens amplification of starlight (BLAST). We explore the electromagnetic transients produced when accounting for the relative proper motion of the source, either a single or a binary star, the eccentricity and precession of the SMBHB, and the relative inclination. Systems where a star rapidly drifts across the caustic produce a single- or double-peaked flare. In the opposite limit, a star with no relative proper motion produces quasi-periodic lensed starlight (QPLS), i.e., repeated peaks that track the system's orbital evolution. We determine the expected magnification and peak duration in different circumstances, and calculate the magnification curves and their Fourier transforms. This study may help construct search pipelines to identify SMBHBs in electromagnetic time-domain surveys.",
+      "published": "2026-10-14T17:46:06Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20557v1",
+      "categories": [
+        "astro-ph.GA",
+        "astro-ph.CO",
+        "gr-qc"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20557v1"
+    },
+    {
+      "id": "2610.20534v1",
+      "title": "Revisiting Simple Baselines for Relational Deep Learning",
+      "authors": [
+        "Viet The Nguyen",
+        "Vijay Prakash Dwivedi",
+        "Gunther Gust"
+      ],
+      "abstract": "Relational deep learning has emerged as a powerful paradigm for learning end-to-end predictive models over relational databases by representing them as temporal heterogeneous graphs. Recent advances based on graph neural networks and Transformers have achieved strong performance across diverse domains. However, the effectiveness of simpler relational baselines remains underexplored, making it difficult to assess how much architectural complexity is needed to achieve strong predictive performance. Motivated by the observation that predictive signals arise from target attributes, relational attributes, and historical labels, we revisit how effectively these signals can be exploited using simple propagation methods. We adapt fixed low-pass feature propagation to relational entity graphs and train an MLP for prediction. The resulting predictions are further refined using Correct-and-Smooth, a graph-based label propagation algorithm that incorporates historical labels over task-specific meta-graphs connecting target entities. Across classification and regression tasks on RelBench, an MLP trained on neighborhood-filtered features outperforms one using only target-entity features on most tasks and recovers a substantial portion of the performance of heterogeneous GNNs. Correct-and-Smooth provides further gains from historical labels, although applying it requires a separately constructed meta-graph because connections among target entities are not directly specified by the relational entity graph. Together, our studies revisit the effectiveness of established propagation methods as simple RDL baselines while identifying canonical meta-graph construction as a key challenge for effective label propagation.",
+      "published": "2026-10-14T17:30:17Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20534v1",
+      "categories": [
+        "cs.LG"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20534v1"
+    },
+    {
+      "id": "2610.20515v1",
+      "title": "Petz Recovery through a Single Polar Transformation for Approximate Quantum Error Correction",
+      "authors": [
+        "Hanzhang Zhao",
+        "Shenglong Xu"
+      ],
+      "abstract": "The Petz recovery map provides a near optimal decoder for approximate quantum error correction, but its inverse square-root normalization complicates circuit implementation. We use the polar structure of the Petz recovery isometry to implement recovery through a single quantum singular value transformation (QSVT). We give explicit block-encoding circuits and an extended recovery isometry that yields approximate Petz recovery without postselection. We bound the diamond distance between the approximate and ideal Petz encoding-recovery channels in terms of a spectrum-weighted loss, which provides a channel specific objective for optimizing the QSVT angles. Uniform polynomial approximation yields an asymptotic error bound that decays exponentially with the number of QSVT iterations, at a rate controlled by the smallest nonzero scaled singular value. Applications to Haar-random encoding and the Hayden-Preskill protocol illustrate the tradeoff between circuit depth and recovery accuracy and place existing scrambling decoders within a common Petz recovery framework.",
+      "published": "2026-10-14T17:16:47Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20515v1",
+      "categories": [
+        "quant-ph"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20515v1"
+    },
+    {
+      "id": "2610.20502v1",
+      "title": "Graph-Enhanced Disease Trajectory Discovery and Temporal Endpoint Forecasting from Longitudinal Electronic Health Records",
+      "authors": [
+        "Jin-Jia Zheng",
+        "Vincent S. Tseng"
+      ],
+      "abstract": "Longitudinal electronic health records (EHRs) can reveal disease-progression structure, while useful forecasting requires leakage-controlled discovery, censor-aware outcomes, and inspectable trajectory evidence. We developed a graph-enhanced framework in MIMIC-IV v3.1 that splits patients before graph construction, learns train-only consecutive-admission transitions, and freezes endpoint-specific branching-motif policies selected on validation data. The final catalog contained 99,527 motifs, and a time-aware Transformer retrieved at most 24 patient-compatible motifs per endpoint through endpoint-specific cross-attention. Across five training seeds, micro-AUPRC increased from 0.9330 to 0.9357, while event-time MAE decreased from 676.9 to 657.7 days (reduction 19.2 days; 95% paired patient-cluster bootstrap CI, 13.8-24.8). Timing effects were heterogeneous: MAE worsened for events within 730 days but improved by 58.9 days for events occurring after 730 days. In an exploratory internal temporal split, branch conditioning reduced conditional event-time MAE by 26.9 days (95% CI, 23.0-30.8) without evidence of better micro-AUPRC. Corrected survival evaluation over the supported 0-2,555-day interval did not establish macro C-index or integrated Brier score superiority over a matched history-only discrete-hazard model. A directed, degree-matched GNN repair substantially improved unseen-edge discovery, yet replacing GNN-derived scores within fixed motif identities did not improve downstream forecasting. These results position branching motifs as structured trajectory context whose main value is long-range timing support rather than uniformly stronger endpoint discrimination, survival prediction, or causal explanation.",
+      "published": "2026-10-14T17:08:50Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20502v1",
+      "categories": [
+        "cs.LG"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20502v1"
+    },
+    {
+      "id": "2610.20500v1",
+      "title": "Separation of variables for coupled radiative perturbations of Kerr-Newman-de Sitter black holes",
+      "authors": [
+        "Daisuke Yoshida"
+      ],
+      "abstract": "We extend Hintz's separation of variables for radiative gravitational and electromagnetic perturbations from Kerr-Newman to Kerr-Newman-de Sitter black holes. On subextremal backgrounds with nonzero rotation and charge, an explicit algebraic matrix transformation yields coupled two-component radial and angular ordinary differential systems linked by a common separation constant. The transformation is independent of the frequency and azimuthal number and applies to both signs of spin weight. For real frequencies, we establish a complete angular mode decomposition. We also translate regularity at the future black hole outer and cosmological horizons into ingoing and outgoing boundary conditions, respectively, for the separated radial systems. These results show that exact separation of the coupled radiative equations extends beyond asymptotically flat Kerr-Newman spacetime.",
+      "published": "2026-10-14T17:08:37Z",
+      "pdf_url": "https://arxiv.org/pdf/2610.20500v1",
+      "categories": [
+        "gr-qc",
+        "math-ph"
+      ],
+      "abs_url": "https://arxiv.org/abs/2610.20500v1"
+    }
+  ]
+}

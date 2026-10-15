@@ -1,0 +1,10 @@
+{
+  "exists": true,
+  "repo": "saeidrazavi/RECON",
+  "stars": 2,
+  "forks": 0,
+  "last_push": "2026-10-15T03:13:51Z",
+  "description": "Official implementation of the paper: RECON: Representation Conditioning for Generation",
+  "language": "Python",
+  "html_url": "https://github.com/saeidrazavi/RECON"
+}
