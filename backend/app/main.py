@@ -14,10 +14,12 @@ from app.api import upload
 from app.api import qa
 from app.api import translate
 from app.api import recommendation_api
+from app.api import graph_api
 app.include_router(upload.router, prefix="/api")
 app.include_router(qa.router, prefix="/api")
 app.include_router(translate.router, prefix="/api")
 app.include_router(recommendation_api.router, prefix="/api")
+app.include_router(graph_api.router, prefix="/api")
 
 
 @app.get("/health")
