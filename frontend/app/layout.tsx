@@ -14,6 +14,7 @@ const navItems = [
   { href: "/chat", label: "智能问答" },
   { href: "/reader", label: "阅读翻译" },
   { href: "/graph", label: "引用图谱" },
+  { href: "/survey", label: "综述与前沿" },
   { href: "/writer", label: "写作 Copilot" },
 ];
 

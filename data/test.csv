@@ -1,0 +1,5 @@
+model,accuracy
+BERT,88.5
+GPT-2,90.1
+RoBERTa,91.3
+T5,89.8
