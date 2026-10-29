@@ -5,6 +5,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import re
 import shutil
 import uuid
+# 加在 import 之后
+_STRUCTURE_CACHE = {}
+_REFERENCE_CACHE = {}
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from fastapi.responses import FileResponse
 
@@ -172,7 +175,11 @@ async def get_paper_pdf(paper_id: str):
 
 @router.get("/papers/{paper_id}/structure")
 async def get_paper_structure(paper_id: str):
-    """标题树（PyMuPDF 精确定位）"""
+    """获取论文的标题树结构（带缓存）"""
+    # 1. 先查缓存
+    if paper_id in _STRUCTURE_CACHE:
+        return _STRUCTURE_CACHE[paper_id]
+
     db = SessionLocal()
     try:
         paper = db.query(Paper).filter(Paper.id == paper_id).first()
@@ -190,31 +197,37 @@ async def get_paper_structure(paper_id: str):
         locator = PDFLocator(paper.file_path)
         located_headings = locator.locate_headings(structure["headings"])
 
-        return {
+        result = {
             "paper_id": paper_id,
             "title": paper.title,
             "total_pages": locator.doc.page_count,
             "headings": located_headings,
         }
+        
+        # 2. 写入缓存
+        _STRUCTURE_CACHE[paper_id] = result
+        return result
     finally:
         db.close()
 
 
 @router.get("/papers/{paper_id}/references")
 async def get_paper_references(paper_id: str):
-    """References 列表 + 双向引用位置（PyMuPDF 精确定位）"""
+    """提取论文的 References 列表"""
     db = SessionLocal()
     try:
         paper = db.query(Paper).filter(Paper.id == paper_id).first()
         if not paper:
             raise HTTPException(status_code=404, detail="论文不存在")
+
         if not os.path.exists(paper.markdown_path):
             raise HTTPException(status_code=404, detail="Markdown 文件不存在")
 
         with open(paper.markdown_path, "r", encoding="utf-8") as f:
             markdown = f.read()
 
-        ref_match = re.search(r'^#+\s*References\s*$', markdown, re.MULTILINE | re.IGNORECASE)
+        # 兼容各种标题格式
+        ref_match = re.search(r'^#*\s*References\s*$', markdown, re.MULTILINE | re.IGNORECASE)
         refs = []
         if ref_match:
             ref_section = markdown[ref_match.end():]
@@ -222,13 +235,24 @@ async def get_paper_references(paper_id: str):
             if next_heading:
                 ref_section = ref_section[:next_heading.start()]
 
+            # 方式 1：[N] 格式
             pattern = re.compile(r'^\[(\d+)\]\s+(.+?)(?=^\[\d+\]|\Z)', re.MULTILINE | re.DOTALL)
             for match in pattern.finditer(ref_section):
                 ref_num = int(match.group(1))
                 ref_text = match.group(2).strip().replace("\n", " ")
                 ref_text = re.sub(r'\s+', ' ', ref_text)[:300]
                 refs.append({"num": ref_num, "text": ref_text})
+            
+            # 方式 2：纯文本段落格式（如果 [N] 没提取到）
+            if not refs:
+                paragraphs = re.split(r'\n\s*\n', ref_section)
+                for i, p in enumerate(paragraphs, start=1):
+                    text = p.strip().replace("\n", " ")
+                    text = re.sub(r'\s+', ' ', text)
+                    if len(text) > 20:
+                        refs.append({"num": i, "text": text[:300]})
 
+        # 用 PyMuPDF 定位
         locator = PDFLocator(paper.file_path)
         ref_section_loc = locator.locate_ref_section()
         ref_page = ref_section_loc["page"] if ref_section_loc else None
@@ -256,7 +280,6 @@ async def get_paper_references(paper_id: str):
         }
     finally:
         db.close()
-
 
 @router.get("/papers/{paper_id}/page/{page_num}")
 async def get_paper_page_text(paper_id: str, page_num: int):
