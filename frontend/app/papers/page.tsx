@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface Paper {
   id: string;
@@ -15,8 +15,8 @@ export default function PapersPage() {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [duplicateInfo, setDuplicateInfo] = useState<any>(null);
+  const currentFileRef = useRef<File | null>(null);
 
-  // 获取论文列表
   async function fetchPapers() {
     try {
       const res = await fetch('http://localhost:8000/api/papers');
@@ -34,15 +34,25 @@ export default function PapersPage() {
   }, []);
 
   // 处理上传
-  async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
+  async function handleUpload(e: React.ChangeEvent<HTMLInputElement>, force: boolean = false) {
+    let file = e.target.files?.[0];
+    
+    if (force && currentFileRef.current) {
+      file = currentFileRef.current;
+    } else if (file) {
+      currentFileRef.current = file;
+    }
+
     if (!file) return;
 
     setUploading(true);
-    setDuplicateInfo(null);
+    if (!force) setDuplicateInfo(null);
 
     const formData = new FormData();
     formData.append('file', file);
+    if (force) {
+      formData.append('force_upload', 'true');
+    }
 
     try {
       const res = await fetch('http://localhost:8000/api/upload', {
@@ -52,11 +62,10 @@ export default function PapersPage() {
       const data = await res.json();
 
       if (data.status === 'duplicate_detected') {
-        // 触发去重预警
         setDuplicateInfo(data);
       } else if (data.status === 'success') {
-        // 上传成功，刷新列表
         alert(`上传成功：${data.title}\n分块数量：${data.chunks_count}`);
+        currentFileRef.current = null;
         fetchPapers();
       } else {
         alert('上传失败：' + (data.detail || '未知错误'));
@@ -66,8 +75,31 @@ export default function PapersPage() {
       alert('请求失败，请检查后端是否启动');
     } finally {
       setUploading(false);
-      // 清空 input 的值，允许重复上传同一个文件
-      e.target.value = '';
+      if (e.target && e.target.value) {
+        e.target.value = ''; 
+      }
+    }
+  }
+
+  // 处理删除
+  async function handleDelete(paperId: string, title: string) {
+    if (!confirm(`确定要彻底删除《${title}》吗？该操作不可恢复，并且会同时删除其向量索引。`)) return;
+
+    try {
+      const res = await fetch(`http://localhost:8000/api/papers/${paperId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      
+      if (res.ok) {
+        alert('删除成功');
+        fetchPapers();
+      } else {
+        alert('删除失败：' + (data.detail || '未知错误'));
+      }
+    } catch (e) {
+      console.error(e);
+      alert('网络请求失败');
     }
   }
 
@@ -96,7 +128,7 @@ export default function PapersPage() {
             type="file"
             accept=".pdf"
             className="hidden"
-            onChange={handleUpload}
+            onChange={(e) => handleUpload(e, false)}
             disabled={uploading}
           />
         </label>
@@ -107,20 +139,30 @@ export default function PapersPage() {
         <div className="mb-8 bg-amber-50 border border-amber-300 rounded-xl p-5 shadow-sm animate-fade-in">
           <div className="flex items-start gap-3">
             <div className="text-2xl">⚠️</div>
-            <div>
+            <div className="flex-1">
               <h3 className="text-amber-800 font-bold mb-1">检测到高度相似的论文</h3>
-              <p className="text-sm text-amber-700 mb-3">
-                系统基于正文摘要的 Embedding 计算发现，该论文与库中已有的
-                <span className="font-semibold mx-1">《{duplicateInfo.matched_paper_title}》</span>
-                相似度高达 <span className="font-semibold">{(duplicateInfo.similarity * 100).toFixed(2)}%</span>。
-                建议保留已有版本。
+              <p className="text-sm text-amber-700 mb-4">
+                系统基于摘要语义计算，发现该论文与库中已有的《{duplicateInfo.matched_paper_title}》相似度高达 {(duplicateInfo.similarity * 100).toFixed(2)}%。
               </p>
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <button
-                  onClick={() => setDuplicateInfo(null)}
-                  className="px-4 py-1.5 text-xs bg-amber-600 text-white rounded hover:bg-amber-700"
+                  onClick={() => {
+                    setDuplicateInfo(null);
+                    currentFileRef.current = null;
+                  }}
+                  className="px-4 py-1.5 text-xs bg-slate-200 text-slate-700 rounded hover:bg-slate-300 transition"
                 >
-                  我知道了（保留旧版）
+                  取消（保留旧版）
+                </button>
+                <button
+                  onClick={() => {
+                    const fakeEvent = { target: { value: '', files: null } } as any;
+                    handleUpload(fakeEvent, true);
+                    setDuplicateInfo(null);
+                  }}
+                  className="px-4 py-1.5 text-xs bg-red-600 text-white rounded hover:bg-red-700 transition"
+                >
+                  仍要保存为新版本（强制入库）
                 </button>
               </div>
             </div>
@@ -144,16 +186,26 @@ export default function PapersPage() {
         ) : (
           <div className="space-y-3">
             {papers.map((p) => (
-              <div key={p.id} className="bg-white border border-slate-200 rounded-xl p-4 hover:shadow-sm transition">
-                <div className="font-semibold text-slate-800 text-sm mb-1">{p.title}</div>
-                <div className="text-xs text-slate-500 mb-2 truncate">
-                  {p.authors?.slice(0, 100) || '未知作者'}
+              <div key={p.id} className="bg-white border border-slate-200 rounded-xl p-4 hover:shadow-sm transition flex justify-between items-start">
+                <div className="flex-1 min-w-0 pr-4">
+                  <div className="font-semibold text-slate-800 text-sm mb-1">{p.title}</div>
+                  <div className="text-xs text-slate-500 mb-2 truncate">
+                    {p.authors?.slice(0, 100) || '未知作者'}
+                  </div>
+                  <div className="flex items-center gap-4 text-[11px] text-slate-400">
+                    <span className="font-mono bg-slate-100 px-2 py-0.5 rounded">{p.id.slice(0, 8)}</span>
+                    {p.page_count && <span>{p.page_count} 页</span>}
+                    <span>上传于 {new Date(p.created_at).toLocaleString()}</span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-4 text-[11px] text-slate-400">
-                  <span className="font-mono bg-slate-100 px-2 py-0.5 rounded">{p.id.slice(0, 8)}</span>
-                  {p.page_count && <span>{p.page_count} 页</span>}
-                  <span>上传于 {new Date(p.created_at).toLocaleString()}</span>
-                </div>
+                
+                {/* 删除按钮 */}
+                <button
+                  onClick={() => handleDelete(p.id, p.title)}
+                  className="px-3 py-1.5 text-xs text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition shrink-0 flex items-center gap-1"
+                >
+                  🗑️ 删除
+                </button>
               </div>
             ))}
           </div>

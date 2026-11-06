@@ -1,0 +1,265 @@
+{
+  "query": "large language model",
+  "results": [
+    {
+      "id": "2611.08489v1",
+      "title": "BeAR: The Bern Atmospheric Retrieval code - A GPU-accelerated framework for low-resolution, high-resolution, and joint retrievals of exoplanet atmospheres",
+      "authors": [
+        "Esther Wang",
+        "Daniel Kitzmann",
+        "H. Jens Hoeijmakers",
+        "Joost P. Wardenier",
+        "Helena Lecoq-Molinos"
+      ],
+      "abstract": "We present BeAR, the Bern Atmospheric Retrieval code and successor of Helios-r, and its new high-resolution cross-correlation framework for emission and transmission spectra. BeAR performs joint retrievals by adding the log-likelihoods of high- and low-resolution data computed from the same model atmosphere. The framework implements established cross-correlation log-likelihoods, with the line-depth scaling either fitted analytically or sampled as a free parameter, their per-pixel generalization, fast model filtering, and model re-injection adapted to this filtering. The forward model and likelihood run entirely on a graphics processing unit (GPU). One forward model takes about 1 ms on an NVIDIA GH200, allowing millions of models per minute on a GPU cluster. In separate retrievals of Gemini South/IGRINS and JWST/NIRSpec dayside spectra of the hot Jupiter WASP-77Ab, BeAR reproduces published abundances, C/O ratios, and metallicities to within 1.5 sigma, the preference for 13CO, and the thermal structure and line contrast to within 1 sigma. The joint retrieval confirms a sub-solar metallicity and a near-solar C/O ratio. A full IGRINS retrieval with 17 free parameters takes 27 to 42 minutes on a single NVIDIA GeForce RTX 5080 or about 14 minutes on eight RTX 4090 GPUs. Injection--recovery tests show that the posteriors underestimate the uncertainties of abundance ratios by about a factor of two.",
+      "published": "2026-11-05T18:59:48Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08489v1",
+      "categories": [
+        "astro-ph.EP",
+        "astro-ph.IM"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08489v1"
+    },
+    {
+      "id": "2611.08488v1",
+      "title": "Provable circuit-level thresholds for non-abelian topological phases",
+      "authors": [
+        "Yuanjie Ren",
+        "Margarita Davydova",
+        "Shankar Balasubramanian",
+        "Andreas Bauer"
+      ],
+      "abstract": "We provide an explicit scheme to realize a quantum memory in any 2D non-chiral topological order. For this, we construct syndrome extraction circuits based on the Turaev-Viro path integral as well as a classical algorithm for decoding on the fly. We prove that our scheme has a threshold under a local stochastic circuit-level noise model and discuss how to generalize it to implement topological logical gates.",
+      "published": "2026-11-05T18:59:44Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08488v1",
+      "categories": [
+        "quant-ph",
+        "cond-mat.str-el",
+        "math-ph"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08488v1"
+    },
+    {
+      "id": "2611.08487v1",
+      "title": "User Embeddings are Superpositions of Interpretable Behavioral Modes",
+      "authors": [
+        "Jonathan Kozaczuk",
+        "Zheng Dong",
+        "Noyan Evirgen",
+        "Keivan Majidi",
+        "Eddie K. H. Ng",
+        "Chris Porter",
+        "Qi Zhao",
+        "Jia Geng",
+        "Changmao Li",
+        "Brandon R. Feng"
+      ],
+      "abstract": "User embeddings are central components of modern recommendation, personalization, and behavioral modeling systems. Though these embeddings can compactly encode rich behavioral information, they are inherently dense and opaque, limiting interpretability. To address this gap, we argue that user embeddings can be understood as sparse superpositions of interpretable behavioral modes. This structure is directly predicted by generative models of user behavior for linear embeddings and extends approximately to deep-learning representations by the superposition hypothesis. Superimposed modes can naturally be recovered by sparse dictionary learning methods, such as sparse autoencoders (SAEs), and recovered modes can be automatically named and queried in natural language. We validate mode recovery against known ground truth on synthetic data, where SAEs recover modes better than classical sparse baselines, including on transformer-encoded embeddings. We then apply the method to classical and transformer-based user embeddings from two real-world datasets. We also show how the corresponding natural-language labels enable zero-shot audience retrieval and characterization over embeddings never trained on text. The framework is post-hoc and model-agnostic, requiring no modification to the upstream embedding system.",
+      "published": "2026-11-05T18:59:42Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08487v1",
+      "categories": [
+        "cs.LG"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08487v1"
+    },
+    {
+      "id": "2611.08486v1",
+      "title": "Do You Miss the Nights We Spent Crafting Figures? Rethinking Teaser and Framework Figures in the Age of Generative AI",
+      "authors": [
+        "Xiaoqi Zhao",
+        "Youwei Pang",
+        "Kailai Zhou"
+      ],
+      "abstract": "Scientific figures give research ideas a visual form through choices of abstraction, composition, and emphasis. Generative AI offers new ways to realize these choices, raising questions about explanatory clarity and purposeful visual expression. We examine these questions through a visual retrospective of 371 motivation and framework figures from 200 papers. The corpus comprises a quota-based main sample of 160 papers spanning four temporal periods and a separate purposive style-contrast sample of 40 papers. A single multimodal judge evaluates six dimensions of communication and design, with three repeated judgments per figure. We attempt source-constrained revisions of all 371 figures, of which 369 pass the recorded fidelity checks. Original-figure ratings show no uniform decline across periods. Revisions increase mean clarity ratings by 0.428 points and decrease aesthetic coherence ratings by 0.111 points on a five-point scale. Gains in the six-dimension average are larger for main-sample motivation figures than for frameworks. Case analyses show that added explanation can clarify comparisons while leaving typographic hierarchy and visual economy unresolved. These model-based findings support researcher-led design, with AI assisting exploration and authors retaining responsibility for explanatory purpose, composition, and scientific relationships. The accompanying atlas and evaluation records are available at https://ntu-ai4x.github.io/Rethinking_Figures/index_en.html.",
+      "published": "2026-11-05T18:59:33Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08486v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08486v1"
+    },
+    {
+      "id": "2611.08485v1",
+      "title": "Where and Why is Grounded Reasoning Useful?",
+      "authors": [
+        "David Yan",
+        "Le Xue",
+        "Forrest Huang",
+        "Qiuyi Zhang",
+        "Dustin Tran",
+        "Andrew M. Dai",
+        "Yinfei Yang"
+      ],
+      "abstract": "Grounded reasoning, where a model outputs text coordinates of relevant locations in chain-of-thought reasoning, is a common strategy for solving complex visual reasoning problems. However, the benefits and limitations of grounded reasoning are understudied. We study where and why grounded reasoning is most useful. To do so, we introduce a chain-of-thought analysis method to measure how much a model uses its outputted grounding in its thinking trace and perform a detailed ablation study of a grounded reasoning training recipe. We find that grounded reasoning improves counting but shows no significant gain over baselines without coordinate grounding across a wide range of spatial reasoning and perception benchmarks. Using several synthetic tasks, we show that grounded reasoning is most useful when a task requires undescribable references, which are visual concepts that are difficult to describe in language. However, we observe that many existing visual reasoning benchmarks are solvable with only describable text references. To close this gap, we introduce BrickVision, a new benchmark that requires undescribable visual references to solve.",
+      "published": "2026-11-05T18:59:32Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08485v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08485v1"
+    },
+    {
+      "id": "2611.08484v1",
+      "title": "Evolution of Dust In Protoplanetary Disks With Magnetized Winds",
+      "authors": [
+        "Olcay Goksu",
+        "Ralph Pudritz",
+        "Timmy Delage"
+      ],
+      "abstract": "Observations and theory increasingly indicate that protoplanetary disks are weakly turbulent, implying that magnetized disk winds may dominate their angular momentum transport and long-term evolution. Yet dust evolution in wind-dominated disks remains poorly understood, despite its importance for planet formation. In particular, whether wind-dominated disk evolution can create regions with enhanced dust-to-gas mass ratios that enable planetesimal formation via the streaming instability is unclear. We build a parametric hybrid disk evolution model that includes turbulent accretion, wind-driven accretion, and wind-driven mass loss to investigate dust evolution in magnetized protoplanetary disks. We employ this model to carry out a parameter study in which the initial total accretion rate, the wind-driven mass loss rate, and the turbulence strength are varied. We find that although wind-dominated disks are more favorable to dust growth and concentration than turbulence-dominated disks, conditions suitable for the streaming instability arise only within the inner few au and only under the most extreme conditions: very weak turbulence ($α_\\text{turb} = 10^{-5}$) where magnetized winds drive most of the accretion ($\\dot{M}_\\text{acc,tot} \\simeq \\dot{M}_\\text{wind,acc}$), and wind-driven mass loss comparable to the accretion rate ($\\dot{M}_\\text{wind,outflow} \\simeq \\dot{M}_\\text{acc,wind}$). Our results therefore imply that, beyond the inner few au, the parametric wind-driven evolution models considered in the literature do not by themselves produce conditions suitable for planetesimal formation via the streaming instability, motivating more physically complete models in which spontaneous, long-lived dust traps can arise.",
+      "published": "2026-11-05T18:59:31Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08484v1",
+      "categories": [
+        "astro-ph.EP"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08484v1"
+    },
+    {
+      "id": "2611.08481v1",
+      "title": "Joint analysis of the Macquart relation and the dispersion measure power spectrum: cross-covariance and redshift self-calibration",
+      "authors": [
+        "Amy Wayland",
+        "Robert Reischke"
+      ],
+      "abstract": "The dispersion measures (DMs) of fast radio bursts (FRBs) trace ionised baryons along the line of sight, probing baryonic feedback. Two complementary observables can be constructed from an FRB catalogue: the DM-redshift (Macquart) relation of host-identified FRBs, and the angular power spectrum of the DM field of the full catalogue. Their joint analysis requires their cross-covariance. We derive it within the halo model and show it is a super-sample effect: only the monopole of an individual DM correlates with the angular power spectrum, yielding an exact, model-independent bound on the correlation coefficient. We validate the calculation against log-normal forward simulations of $10^4$ FRBs. For individual DMs, the correlation with the bandpowers is at the per cent level. Neglecting the cross-covariance changes the width of the $χ^2$ distribution by only 0.8 per cent, so the two observables can be treated as effectively independent for wide-area surveys. In a joint forecast with an LSST-like weak lensing survey, adding the Macquart relation tightens constraints on the physical baryon density by 32 per cent and on the mean host contribution by a factor of 4.1, while improving baryonification parameters by only about 5 per cent, indirectly through the host contribution. Finally, we show that the redshift distribution of FRBs without identified hosts, which enters every DM power spectrum, can be reconstructed by inverting their DMs with the jointly fitted mean relation without biasing the inferred parameters, whereas a 20 per cent error in the mean relation biases the DM power spectrum by up to 2$σ$ per band for $5\\times 10^5$ FRBs.",
+      "published": "2026-11-05T18:59:19Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08481v1",
+      "categories": [
+        "astro-ph.CO"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08481v1"
+    },
+    {
+      "id": "2611.08480v1",
+      "title": "Hyperpolarity of polar foliations of codimension two",
+      "authors": [
+        "Stephan Wiesendorf"
+      ],
+      "abstract": "We consider polar foliations of codimension two on compact simply connected irreducible symmetric spaces. In rank at least two, we prove that these foliations are hyperpolar, settling the remaining case of the hyperpolarity problem discussed by Lytchak. We show that, for irreducible spherical Coxeter quotients, the horizontal universal cover fails to be a spherical building precisely on the Cayley plane, where every such foliation is congruent to one of the two known homogeneous models.",
+      "published": "2026-11-05T18:59:13Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08480v1",
+      "categories": [
+        "math.DG"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08480v1"
+    },
+    {
+      "id": "2611.08478v1",
+      "title": "Scientist World: Grow a Research World for AI-Scientists",
+      "authors": [
+        "Taiming Lu",
+        "Sachin Konan",
+        "Zhuang Liu"
+      ],
+      "abstract": "AI-Scientists arrived, but a world for them to grow in did not. Human scientists take theirs for granted $-$ centuries of open problems and shared ideas, waiting in the scientific literature. To AI-Scientists, that world is readable but not runnable, so we build Scientist World for them: every research paper becomes an executable environment. Our autonomous pipeline extracts each paper's open-ended research question and reproduces its proposed method as the baseline; an AI-Scientist entering the environment is evaluated against what the human authors achieved. We release the first 1,000 verified environments. With the world as an evaluation, we found that frontier AI-Scientists can already surpass the human researchers 74% of the time. As a record of how AI does science, it contains 6,400 hours of research traces, with every idea, experiment, failure, and success. As a training ground, we are able to raise (+158%) a small model to match frontier models in research ideation. At last, AI-Scientists' own world has arrived, grown from and growing with science itself.",
+      "published": "2026-11-05T18:58:17Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08478v1",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08478v1"
+    },
+    {
+      "id": "2611.08477v1",
+      "title": "EgoGeneralist: Unifying Egocentric Action-Video Tasks through Video-Native Modeling",
+      "authors": [
+        "Yanlin Jin",
+        "Bowen Yang",
+        "Cheng Zhang",
+        "Yifan Yang",
+        "Zhe Li",
+        "Jianfei Cai",
+        "Kai Zhu"
+      ],
+      "abstract": "Modern video models possess strong visual priors, yet do not natively represent human action in metric 3D space. We present EgoGeneralist, which adapts pretrained video generators to unify action-conditioned egocentric video generation, pose estimation, and joint action-video generation. Our role-adaptive action renderer provides video-native representations for multidirectional action-video learning, making metric motion usable as both a spatial control signal and a recoverable generation target. Cross-stream action-video coupling establishes close correspondence between metric motion and visual dynamics through lightweight adaptation while preserving the pretrained visual prior. Together, these designs establish a generalist framework spanning five action-video tasks. Despite adaptation only on controlled laboratory recordings, EgoGeneralist generalizes to diverse unseen scenes and interactions with effective action control and visual quality, bridging pretrained visual knowledge and metric 3D human motion.",
+      "published": "2026-11-05T18:58:13Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08477v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08477v1"
+    },
+    {
+      "id": "2611.08474v1",
+      "title": "Monus vs. Interpretations in Semiring Semantics",
+      "authors": [
+        "Phokion G. Kolaitis"
+      ],
+      "abstract": "Interpretations have been widely used in the study of provenance of queries on semiring-annotated databases. Here, we consider two different interpretation-based semantics for first-order formulas in negation normal form, namely, the canonical-interpretation semantics and the compatible-interpretation semantics. We show that the resulting query languages cannot express the monus operation on semiring-annotated relations, when the annotations come from the bag semiring or the tropical semiring or the fuzzy semiring. Consequently, the semantics of SQL cannot be captured using the interpretation-based semantics considered here.",
+      "published": "2026-11-05T18:56:32Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08474v1",
+      "categories": [
+        "cs.DB"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08474v1"
+    },
+    {
+      "id": "2611.08470v1",
+      "title": "Joint Electricity Price and Load Forecasting for Data Center Battery Dispatch Using Polynomial Diffusion Models",
+      "authors": [
+        "Matthew Van Ham",
+        "Yiping Liu",
+        "Xiaozhe Wang"
+      ],
+      "abstract": "The rapid growth of large-scale data centers (DCs) is increasing electricity demand, market volatility, and operating costs. Battery energy storage systems (BESSs) can mitigate these challenges by shifting electricity purchases from high-price to low-price periods. This paper proposes a real-time BESS dispatch framework using polynomial diffusion models (PDMs) to forecast both electricity prices and DC loads. Leveraging the closed-form conditional expectations of PDMs, the forecasts are integrated into a dynamic programming (DP) framework to minimize electricity procurement costs. Across the evaluated BESS configurations, the proposed approach achieves 2.63 times the cost savings of a rule-based (RB) strategy.",
+      "published": "2026-11-05T18:55:37Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08470v1",
+      "categories": [
+        "eess.SY"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08470v1"
+    },
+    {
+      "id": "2611.08469v1",
+      "title": "Same Behavior, Different Mechanism: What Finite Experiments Can Certify About Integrated Information",
+      "authors": [
+        "Linqian Wu",
+        "Diaoxuan He"
+      ],
+      "abstract": "Interpretability, AI auditing and assessments of machine consciousness increasingly rest on mechanism-level quantities: functionals of a system's causal transition law that describe how it computes, not what it outputs. Experiments see that law only through finite, partial and noisy interventions. We ask when such a quantity is identifiable from an experiment's access, continuous in the mechanism and certifiable from finite data, and answer exactly for a deliberately demanding case - the integrated information $\\varphi$ of integrated information theory - in stochastic networks of four and five units with known ground truth. Behavior can be silent: a recurrent and a feed-forward network with identical input-output laws at their response delay carry 0.28 and 0 bits, yet internal recordings separate them within 4-53 trials. Partial access can be just as blind: in our examples, units left out of a one-step recording impose precision floors of 0.30-1.02 bits that no sample size lowers, and in all-but-self parity networks, recordings of any length see several hidden units only through the product of their fidelities - a symmetry that one intervention broke in exact checks. The measure has sharp edges: because $\\varphi$ selects a partition, and the cause and effect it specifies, by one criterion and reports another, infinitesimal changes of mechanism that cross an edge change it by 25-100% at 99% of the edges we found in random networks, and about 1% of surrogate models that fit interventional data almost perfectly misreport it by more than 20%. One-sided claims survive: the same data certify a lower bound on both sides of an edge, and we prove $\\varphi>1.004$ bits throughout a 64-dimensional region of mechanisms and certify it from about $10^7$ controlled transitions with false-certificate probability at most $α$. Measurability is thus a design question with computable answers.",
+      "published": "2026-11-05T18:55:31Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08469v1",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "q-bio.NC"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08469v1"
+    },
+    {
+      "id": "2611.08468v1",
+      "title": "An Accelerated Proximal Gradient Method for Bures-Wasserstein Space",
+      "authors": [
+        "Jakob Nylöf",
+        "Sloan Nietert",
+        "Julien Pallage",
+        "Giancarlo Ferrari-Trecate",
+        "Daniel Kuhn",
+        "John Lygeros"
+      ],
+      "abstract": "We study composite optimization over the Bures--Wasserstein (BW) space of Gaussian measures. Our main observation is that a useful class of BW problems can be lifted into the Euclidean space of affine transport maps, such that the lifted problems can be solved efficiently using accelerated proximal gradient methods. For objectives whose smooth and nonsmooth components admit convex smooth and convex proximable affine lifts, respectively, our algorithm BW-FISTA achieves minimax-optimal objective gap $O(k^{-2})$ after $k$ iterations. We verify these regularity conditions for potential and interaction energies together with common spectral regularizers, and we treat stochastic gradients under a suitable noise model. As a principal application, we consider Gaussian variational inference with a log-concave, log-smooth target. Here, the resulting entropy term is handled by an efficient, exact proximal step, and we improve the previous rate of $O(k^{-1})$ to $O(k^{-2})$. We numerically verify this predicted boost with synthetic experiments.",
+      "published": "2026-11-05T18:55:10Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08468v1",
+      "categories": [
+        "math.OC"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08468v1"
+    },
+    {
+      "id": "2611.08467v1",
+      "title": "Almost sure bounds and tail phases for critical non-Gaussian holomorphic chaos",
+      "authors": [
+        "Feng Guo"
+      ],
+      "abstract": "Gu and Zhang asked for almost sure upper and lower bounds on the Taylor coefficients $a_n$ of $\\exp(\\sum_{k\\ge1}X_kz^k/\\sqrt{k})$ in the unit disc, and for the dependence of these bounds on the input tail. For independent, identically distributed, rotationally invariant complex inputs with $\\mathbb E|X_1|^2=1$, we prove the universal almost sure bound $|a_n|=O((\\log n)^{1/4})$. Almost surely, $\\limsup_{n\\to\\infty}|a_n|/(\\log n)^{1/4}$ is positive and finite exactly when $\\mathbb E[|X_1|^2\\log^+|X_1|^2]<\\infty$, and is zero otherwise. For each input law, we define a deterministic scale such that, almost surely, the coefficients are bounded exactly when the scale is bounded, and tend to zero exactly when it vanishes. We also determine the almost sure logarithmic growth exponent as the maximum of contributions from collective fluctuations and individual large inputs. Explicit tails exhibit distinct thresholds for boundedness and for upper bounds at the scale in the phase criteria. Examples show that neither the leading tail nor the set of finite logarithmic moments determines the almost sure phase.",
+      "published": "2026-11-05T18:54:50Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.08467v1",
+      "categories": [
+        "math.PR"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.08467v1"
+    }
+  ]
+}

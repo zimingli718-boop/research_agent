@@ -8,12 +8,14 @@ from pydantic import BaseModel
 from services.arxiv_client import ArxivClient
 from services.recommender import Recommender
 from services.github_checker import GitHubChecker
+from services.citation_quality import CitationQualityScorer
 
 router = APIRouter()
 
 arxiv = ArxivClient()
 recommender = Recommender()
 github = GitHubChecker()
+citation_scorer = CitationQualityScorer()
 
 # 内存存储用户反馈
 FEEDBACK_STORE = {}
@@ -32,7 +34,7 @@ class FeedbackRequest(BaseModel):
 
 @router.post("/recommend")
 async def recommend(req: RecommendRequest):
-    """推荐论文：搜索 + 相关性排序 + GitHub 检测 + 推荐理由"""
+    """推荐论文：搜索 + 相关性排序 + GitHub 检测 + 引用含金量 + 推荐理由"""
     candidates = arxiv.search(req.query, max_results=15)
     if not candidates:
         return {"total": 0, "recommendations": []}
@@ -59,6 +61,17 @@ async def recommend(req: RecommendRequest):
                 reasons.append(f"附带开源代码（⭐ {max_stars}）")
             else:
                 reasons.append("附带开源代码")
+
+        # 核心新增：计算引用含金量
+        # 用摘要作为上下文，模拟 Introduction 场景，计算评价词密度与长度评分
+        quality_result = citation_scorer.score_citation(full_text, "Introduction")
+        
+        # 严格判定：只有在相关性和评分都很高的情况下才展示“极高”
+        if quality_result["score"] > 0.8:
+            reasons.append("引用含金量极高（核心基石文献）")
+        elif quality_result["score"] > 0.6:
+            reasons.append("引用含金量较高（重要参考文献）")
+        # 分数太低就不展示了，保持界面干净
 
         if not reasons:
             reasons.append("arXiv 最新论文")

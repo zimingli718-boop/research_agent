@@ -5,10 +5,11 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import re
 import shutil
 import uuid
-# 加在 import 之后
+
 _STRUCTURE_CACHE = {}
 _REFERENCE_CACHE = {}
-from fastapi import APIRouter, UploadFile, File, HTTPException
+
+from fastapi import APIRouter, UploadFile, File, HTTPException, Form
 from fastapi.responses import FileResponse
 
 from services.pdf_parser import PDFParser
@@ -49,8 +50,12 @@ def assign_section_path(chunks, headings, paper_id):
     return metadatas
 
 
+# ================= 1. 上传接口 =================
 @router.post("/upload")
-async def upload_pdf(file: UploadFile = File(...)):
+async def upload_pdf(
+    file: UploadFile = File(...),
+    force_upload: str = Form(None)
+):
     if not file.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="只支持 PDF 文件")
 
@@ -78,7 +83,7 @@ async def upload_pdf(file: UploadFile = File(...)):
 
     dup_result = deduplicator.check_duplicate(structure["abstract"], existing_papers)
 
-    if dup_result["is_duplicate"]:
+    if dup_result["is_duplicate"] and force_upload != "true":
         return {
             "status": "duplicate_detected",
             "similarity": round(dup_result["similarity"], 4),
@@ -133,6 +138,7 @@ async def upload_pdf(file: UploadFile = File(...)):
     }
 
 
+# ================= 2. 获取论文列表 =================
 @router.get("/papers")
 async def list_papers():
     db = SessionLocal()
@@ -155,6 +161,7 @@ async def list_papers():
         db.close()
 
 
+# ================= 3. 获取 PDF 文件 =================
 @router.get("/papers/{paper_id}/pdf")
 async def get_paper_pdf(paper_id: str):
     db = SessionLocal()
@@ -173,10 +180,9 @@ async def get_paper_pdf(paper_id: str):
         db.close()
 
 
+# ================= 4. 获取标题树结构 =================
 @router.get("/papers/{paper_id}/structure")
 async def get_paper_structure(paper_id: str):
-    """获取论文的标题树结构（带缓存）"""
-    # 1. 先查缓存
     if paper_id in _STRUCTURE_CACHE:
         return _STRUCTURE_CACHE[paper_id]
 
@@ -191,8 +197,8 @@ async def get_paper_structure(paper_id: str):
         with open(paper.markdown_path, "r", encoding="utf-8") as f:
             markdown = f.read()
 
-        extractor = StructureExtractor()
-        structure = extractor.extract(markdown)
+        extractor_inst = StructureExtractor()
+        structure = extractor_inst.extract(markdown)
 
         locator = PDFLocator(paper.file_path)
         located_headings = locator.locate_headings(structure["headings"])
@@ -204,16 +210,15 @@ async def get_paper_structure(paper_id: str):
             "headings": located_headings,
         }
         
-        # 2. 写入缓存
         _STRUCTURE_CACHE[paper_id] = result
         return result
     finally:
         db.close()
 
 
+# ================= 5. 获取参考文献 =================
 @router.get("/papers/{paper_id}/references")
 async def get_paper_references(paper_id: str):
-    """提取论文的 References 列表"""
     db = SessionLocal()
     try:
         paper = db.query(Paper).filter(Paper.id == paper_id).first()
@@ -226,7 +231,6 @@ async def get_paper_references(paper_id: str):
         with open(paper.markdown_path, "r", encoding="utf-8") as f:
             markdown = f.read()
 
-        # 兼容各种标题格式
         ref_match = re.search(r'^#*\s*References\s*$', markdown, re.MULTILINE | re.IGNORECASE)
         refs = []
         if ref_match:
@@ -235,7 +239,6 @@ async def get_paper_references(paper_id: str):
             if next_heading:
                 ref_section = ref_section[:next_heading.start()]
 
-            # 方式 1：[N] 格式
             pattern = re.compile(r'^\[(\d+)\]\s+(.+?)(?=^\[\d+\]|\Z)', re.MULTILINE | re.DOTALL)
             for match in pattern.finditer(ref_section):
                 ref_num = int(match.group(1))
@@ -243,7 +246,6 @@ async def get_paper_references(paper_id: str):
                 ref_text = re.sub(r'\s+', ' ', ref_text)[:300]
                 refs.append({"num": ref_num, "text": ref_text})
             
-            # 方式 2：纯文本段落格式（如果 [N] 没提取到）
             if not refs:
                 paragraphs = re.split(r'\n\s*\n', ref_section)
                 for i, p in enumerate(paragraphs, start=1):
@@ -252,7 +254,6 @@ async def get_paper_references(paper_id: str):
                     if len(text) > 20:
                         refs.append({"num": i, "text": text[:300]})
 
-        # 用 PyMuPDF 定位
         locator = PDFLocator(paper.file_path)
         ref_section_loc = locator.locate_ref_section()
         ref_page = ref_section_loc["page"] if ref_section_loc else None
@@ -281,9 +282,10 @@ async def get_paper_references(paper_id: str):
     finally:
         db.close()
 
+
+# ================= 6. 获取单页文本用于翻译 =================
 @router.get("/papers/{paper_id}/page/{page_num}")
 async def get_paper_page_text(paper_id: str, page_num: int):
-    """获取论文指定页的文本（PyMuPDF 精确提取该页文字）"""
     db = SessionLocal()
     try:
         paper = db.query(Paper).filter(Paper.id == paper_id).first()
@@ -311,5 +313,47 @@ async def get_paper_page_text(paper_id: str, page_num: int):
             "text": page_text[:5000],
             "format": "plain",
         }
+    finally:
+        db.close()
+        # ================= 7. 删除论文 =================
+@router.delete("/papers/{paper_id}")
+async def delete_paper(paper_id: str):
+    db = SessionLocal()
+    try:
+        paper = db.query(Paper).filter(Paper.id == paper_id).first()
+        if not paper:
+            raise HTTPException(status_code=404, detail="论文不存在")
+
+        # 1. 从 ChromaDB 删除向量
+        try:
+            chunker.collection.delete(where={"paper_id": paper_id})
+            print(f"[Delete] 已从 ChromaDB 删除 {paper_id} 的向量")
+        except Exception as e:
+            print(f"[Delete] ChromaDB 删除失败: {e}")
+
+        # 2. 从 BM25 重新构建索引（过滤掉被删的）
+        try:
+            all_data = chunker.collection.get()
+            if all_data["documents"]:
+                bm25.build_index(all_data["documents"], all_data["metadatas"])
+        except Exception as e:
+            print(f"[Delete] BM25 重建失败: {e}")
+
+        # 3. 删除本地物理文件
+        if paper.file_path and os.path.exists(paper.file_path):
+            os.remove(paper.file_path)
+        if paper.markdown_path and os.path.exists(paper.markdown_path):
+            os.remove(paper.markdown_path)
+
+        # 4. 删除 SQLite 中的记录（Chunk 和 Paper）
+        db.query(Chunk).filter(Chunk.paper_id == paper_id).delete()
+        db.delete(paper)
+        db.commit()
+
+        # 5. 清空相关缓存
+        _STRUCTURE_CACHE.pop(paper_id, None)
+        _REFERENCE_CACHE.pop(paper_id, None)
+
+        return {"status": "success", "message": "论文已彻底删除"}
     finally:
         db.close()

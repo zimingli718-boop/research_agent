@@ -8,8 +8,8 @@ import pymupdf
 
 load_dotenv()
 
-MAX_PAGES_PER_REQUEST = 20   # MinerU flash 单段页数上限
-MAX_CONCURRENT = 5           # 并发数（太高会被 MinerU 限流）
+MAX_PAGES_PER_REQUEST = 10   # MinerU 单段页数上限
+MAX_CONCURRENT = 1         # 并发数（太高会被 MinerU 限流）
 
 
 class PDFParser:
@@ -142,8 +142,8 @@ class PDFParser:
             try:
                 return self._save_result(markdown, pdf_path, "flash", total_pages)
             except ValueError as e:
-                print(f"[PDFParser] flash 失败: {e}，降级到精准模式")
-                return self.parse_precise(pdf_path)
+                # 如果 flash 返回空，抛出异常供上层捕获
+                raise ValueError(f"flash 模式解析失败: {e}")
 
         return self._parse_segmented_concurrent(pdf_path, "flash", total_pages)
 
@@ -169,9 +169,16 @@ class PDFParser:
         if not os.path.exists(pdf_path):
             raise FileNotFoundError(f"PDF 文件不存在: {pdf_path}")
 
-        if self._has_text_layer(pdf_path):
-            print(f"[PDFParser] 检测到文本层，使用 flash 模式")
-            return self.parse_flash(pdf_path)
-        else:
-            print(f"[PDFParser] 检测为扫描件，使用精准模式（OCR）")
+        # 严格按照要求：先走精准模式
+        print(f"[PDFParser] 优先使用精准模式解析...")
+        try:
             return self.parse_precise(pdf_path)
+        except Exception as e:
+            # 如果精准模式报错（比如额度用完），自动降级到 flash 模式
+            print(f"[PDFParser] 精准模式失败: {e}")
+            print(f"[PDFParser] 准备降级至 flash 模式...")
+            try:
+                return self.parse_flash(pdf_path)
+            except Exception as e2:
+                print(f"[PDFParser] flash 模式也失败: {e2}")
+                raise RuntimeError(f"所有云端解析模式均失败: {e2}")
