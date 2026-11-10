@@ -144,6 +144,12 @@ export default function PapersPage() {
               <p className="text-sm text-amber-700 mb-4">
                 系统基于摘要语义计算，发现该论文与库中已有的《{duplicateInfo.matched_paper_title}》相似度高达 {(duplicateInfo.similarity * 100).toFixed(2)}%。
               </p>
+                {duplicateInfo.diff_summary && (
+                <div className="bg-white/60 p-3 rounded-lg border border-amber-200 mb-4 text-xs text-slate-700 leading-relaxed">
+                  <span className="font-semibold text-amber-800">📝 版本差异对比：</span>
+                  {duplicateInfo.diff_summary}
+                </div>
+              )}
               <div className="flex gap-3">
                 <button
                   onClick={() => {

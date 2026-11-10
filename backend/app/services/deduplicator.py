@@ -4,6 +4,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import numpy as np
 from sentence_transformers import SentenceTransformer
+from dotenv import load_dotenv
+from openai import OpenAI
+
+load_dotenv()
 
 
 class Deduplicator:
@@ -11,6 +15,10 @@ class Deduplicator:
     def __init__(self, model_path: str = "E:/research_agent/models/bge-m3"):
         print("[Deduplicator] 正在加载 BGE-M3 模型...")
         self.model = SentenceTransformer(model_path)
+        self.client = OpenAI(
+            api_key=os.getenv("DEEPSEEK_API_KEY"),
+            base_url=os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+        )
         print("[Deduplicator] 模型加载完成")
 
     def compute_similarity(self, text1: str, text2: str) -> float:
@@ -47,11 +55,30 @@ class Deduplicator:
         max_sim = float(similarities[max_idx])
 
         if max_sim >= threshold:
+            matched_paper = existing_papers[max_idx]
+            
+            # --- 核心新增：自动调用大模型对比版本差异 ---
+            diff_summary = ""
+            try:
+                prompt = f"请对比以下两篇论文的摘要，用 100 字总结新版本的主要修订差异：\n\n旧版摘要：{matched_paper.get('abstract', '')}\n\n新版摘要：{new_abstract}"
+                response = self.client.chat.completions.create(
+                    model="deepseek-chat",
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.3,
+                    max_tokens=300,
+                )
+                diff_summary = response.choices[0].message.content
+            except Exception as e:
+                print(f"[Deduplicator] 版本差异对比失败: {e}")
+                diff_summary = "版本差异对比暂时不可用，请稍后重试。"
+            # -------------------------------------
+
             return {
                 "is_duplicate": True,
                 "similarity": max_sim,
-                "matched_paper": existing_papers[max_idx],
+                "matched_paper": matched_paper,
                 "suggested_action": "keep_existing",
+                "diff_summary": diff_summary,  # 把差异总结返回给前端
             }
         return {
             "is_duplicate": False,

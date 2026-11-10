@@ -10,7 +10,15 @@ import 'react-pdf/dist/Page/TextLayer.css';
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface Heading { level: number; title: string; page: number | null; y: number | null; }
-interface Reference { num: number; text: string; ref_page: number; in_text_pages: number[]; in_text_first_page: number | null; }
+interface Reference { 
+  num: number; 
+  text: string; 
+  ref_page: number; 
+  in_text_pages: number[]; 
+  in_text_first_page: number | null; 
+  target_x?: number;
+  target_y?: number;
+}
 interface PDFViewerProps { pdfUrl: string; paperId: string; }
 
 export default function PDFViewer({ pdfUrl, paperId }: PDFViewerProps) {
@@ -130,9 +138,57 @@ export default function PDFViewer({ pdfUrl, paperId }: PDFViewerProps) {
     }, 100);
   }
 
+  // 核心修改：极其柔和的浅色高亮
   function jumpToRefPage(refNum: number, page: number) {
     setPageNumber(page);
     setActiveRef(refNum);
+    
+    setTimeout(() => {
+      const textLayer = document.querySelector('.react-pdf__Page__textContent');
+      if (!textLayer) return;
+      
+      // 1. 清理旧的高亮（还原文本）
+      textLayer.querySelectorAll('mark.highlight-citation').forEach(el => {
+        const parent = el.parentNode;
+        if (parent) {
+          parent.replaceChild(document.createTextNode(el.textContent || ''), el);
+          parent.normalize();
+        }
+      });
+
+      // 2. 查找并高亮
+      const spans = textLayer.querySelectorAll('span');
+      for (let i = 0; i < spans.length; i++) {
+        const span = spans[i] as HTMLElement;
+        const text = span.textContent || '';
+        const target = `[${refNum}]`;
+        
+        if (text.includes(target)) {
+          const parts = text.split(target);
+          span.innerHTML = '';
+          
+          parts.forEach((part, index) => {
+            if (part) {
+              span.appendChild(document.createTextNode(part));
+            }
+            if (index < parts.length - 1) {
+              const mark = document.createElement('mark');
+              // 极其柔和的荧光笔效果，透明度 0.25
+              mark.style.backgroundColor = 'rgba(253, 224, 71, 0.25)';
+              mark.style.color = '#0f172a';
+              mark.style.padding = '0 1px';
+              mark.style.borderRadius = '2px';
+              mark.className = 'highlight-citation';
+              mark.textContent = target;
+              span.appendChild(mark);
+            }
+          });
+          
+          span.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          break;
+        }
+      }
+    }, 500);
   }
 
   return (
@@ -182,7 +238,7 @@ export default function PDFViewer({ pdfUrl, paperId }: PDFViewerProps) {
         </div>
       </div>
 
-      {/* 3. 右侧参考文献面板（保留你的所有设计，只改了无数字时的文字） */}
+      {/* 3. 右侧参考文献面板 */}
       {showRefs && (
         <aside className="w-80 flex-shrink-0 bg-slate-50 rounded-lg border border-slate-200 p-3 overflow-y-auto hidden xl:block">
           <h2 className="text-sm font-semibold text-slate-700 mb-3">参考文献（{references.length}）</h2>

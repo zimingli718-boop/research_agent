@@ -154,7 +154,6 @@ export default function ChatPage() {
           <h1 className="text-2xl font-bold text-slate-900">智能问答</h1>
           <p className="text-sm text-slate-500 mt-1">基于混合检索与双重溯源，杜绝大模型幻觉</p>
         </div>
-        {/* 清空按钮 */}
         {messages.length > 0 && (
           <button
             onClick={() => {
@@ -215,36 +214,51 @@ export default function ChatPage() {
                         </div>
                       )}
 
+                      {/* ================= 核心修改区：只渲染被实际引用的来源 ================= */}
                       {msg.sources && msg.sources.length > 0 && 
                        !msg.content.includes('不足') && 
                        !msg.content.includes('无法回答') && 
                        !msg.content.includes('没有找到') && (
-                        <div className="mt-6">
-                          <div className="text-xs font-semibold text-slate-500 mb-3">📎 引用溯源（{msg.sources.length} 个片段）</div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {msg.sources.map((s) => {
-                              const isExpanded = expandedSources[`${msgIdx}-${s.index}`];
-                              return (
-                                <div key={s.index} className="bg-slate-50 border border-slate-200 p-4 rounded-xl">
-                                  <div className="flex items-center gap-2 mb-2">
-                                    <span className="text-[10px] font-bold text-blue-600 bg-blue-100 px-2 py-0.5 rounded">[来源{s.index}]</span>
-                                    <span className="text-[10px] text-slate-500 truncate">{s.section_path || '未知章节'}</span>
-                                  </div>
-                                  <div className={`text-xs text-slate-600 leading-relaxed ${isExpanded ? '' : 'line-clamp-3'}`}>
-                                    {s.content_preview}
-                                  </div>
-                                  <button
-                                    onClick={() => toggleExpand(msgIdx, s.index)}
-                                    className="text-[10px] text-blue-500 hover:text-blue-700 mt-2 font-medium"
-                                  >
-                                    {isExpanded ? '收起片段' : '展开完整片段'}
-                                  </button>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
+                        (() => {
+                          // 提取回答中实际出现的 [来源N] 编号
+                          const citedIndices = Array.from(msg.content.matchAll(/\[来源(\d+)\]/g)).map(m => parseInt(m[1]));
+                          // 过滤出被引用的来源卡片
+                          const activeSources = msg.sources.filter(s => citedIndices.includes(s.index));
+                          
+                          if (activeSources.length === 0) return null;
+
+                          return (
+                            <div className="mt-6">
+                              <div className="text-xs font-semibold text-slate-500 mb-3">
+                                📎 引用溯源（{activeSources.length} 个片段）
+                              </div>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {activeSources.map((s) => {
+                                  const isExpanded = expandedSources[`${msgIdx}-${s.index}`];
+                                  return (
+                                    <div key={s.index} className="bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                                      <div className="flex items-center gap-2 mb-2">
+                                        <span className="text-[10px] font-bold text-blue-600 bg-blue-100 px-2 py-0.5 rounded">[来源{s.index}]</span>
+                                        <span className="text-[10px] text-slate-500 truncate">{s.section_path || '未知章节'}</span>
+                                      </div>
+                                      <div className={`text-xs text-slate-600 leading-relaxed ${isExpanded ? '' : 'line-clamp-3'}`}>
+                                        {s.content_preview}
+                                      </div>
+                                      <button
+                                        onClick={() => toggleExpand(msgIdx, s.index)}
+                                        className="text-[10px] text-blue-500 hover:text-blue-700 mt-2 font-medium"
+                                      >
+                                        {isExpanded ? '收起片段' : '展开完整片段'}
+                                      </button>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        })()
                       )}
+                      {/* ================= 核心修改区结束 ================= */}
                     </div>
                   </div>
                 )}

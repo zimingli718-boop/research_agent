@@ -273,6 +273,12 @@ async def get_paper_references(paper_id: str):
             ref["ref_page"] = ref_page
             ref["in_text_pages"] = in_text_pages
             ref["in_text_first_page"] = in_text_pages[0] if in_text_pages else None
+            if locs:
+                ref["target_x"] = locs[0].get("x", 0)
+                ref["target_y"] = locs[0].get("y", 0)
+            else:
+                ref["target_x"] = 0
+                ref["target_y"] = 0
 
         return {
             "paper_id": paper_id,

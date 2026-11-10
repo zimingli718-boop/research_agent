@@ -64,7 +64,7 @@ class PDFLocator:
             page = self.doc[page_num]
             text = page.get_text()
 
-            # 匹配所有 [...] 格式的引用块（支持 [15]、[38, 24, 15]、[15, 16] 等）
+            # 匹配所有 [...] 格式的引用块
             blocks = re.finditer(r'\[[\d,\s]+\]', text)
 
             for block in blocks:
@@ -74,12 +74,14 @@ class PDFLocator:
                 for num_str in nums:
                     num = int(num_str)
                     if 1 <= num <= max_ref_num:
-                        # 用块起始字符位置估算 y 坐标（每行约 80 字符）
+                        # 用块起始字符位置估算坐标
                         char_idx = block.start()
                         y = (char_idx // 80) * 15
+                        x = char_idx % 500
                         citations[num_str].append({
                             "page": page_num + 1,
-                            "y": y,
+                            "x": round(x, 1),
+                            "y": round(y, 1),
                         })
 
         # 去重

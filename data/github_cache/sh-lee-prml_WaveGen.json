@@ -1,0 +1,10 @@
+{
+  "exists": true,
+  "repo": "sh-lee-prml/WaveGen",
+  "stars": 2,
+  "forks": 0,
+  "last_push": "2026-11-10T08:11:55Z",
+  "description": "[NeurIPS 2026] WaveGen: Truly End-to-End Waveform Generation via Internal Spectral Trajectory Learning",
+  "language": "Python",
+  "html_url": "https://github.com/sh-lee-prml/WaveGen"
+}

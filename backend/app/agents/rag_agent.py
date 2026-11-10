@@ -1,5 +1,6 @@
 import os
 import sys
+import re  # 顶部引入正则模块
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dotenv import load_dotenv
@@ -88,6 +89,12 @@ class RAGAgent:
         )
 
         answer = response.choices[0].message.content
+        
+        # 非流式模式下也进行越界拦截
+        invalid_citations = self._check_out_of_bound_citations(answer, len(sources))
+        if invalid_citations:
+            answer = "⚠️ 系统检测到模型试图引用不存在的文献来源，已触发安全拦截（越界编号：" + str(invalid_citations) + "），请重新提问。"
+
         guard_result = self.guardrails.verify(answer, sources)
 
         return {
@@ -96,6 +103,12 @@ class RAGAgent:
             "query": query,
             "guardrails": guard_result,
         }
+
+    def _check_out_of_bound_citations(self, text: str, max_source_idx: int) -> list:
+        """检查文本中是否存在越界的 [来源N] 编号"""
+        citations = re.findall(r'\[来源(\d+)\]', text)
+        invalid = [int(c) for c in citations if int(c) > max_source_idx]
+        return list(set(invalid))  # 去重返回
 
     def answer_stream(self, query: str, top_k: int = 5, paper_ids: list = None):
         """
@@ -129,7 +142,15 @@ class RAGAgent:
                 full_answer += delta.content
                 yield ("token", delta.content)
 
-        # 3. Guardrails 校验
+        # 3. 核心新增：服务端拦截 [来源N] 越界
+        invalid_citations = self._check_out_of_bound_citations(full_answer, len(sources))
+        if invalid_citations:
+            # 如果发现越界引用，直接通知前端并中断，拒绝输出原结果
+            yield ("token", f"\n\n⚠️ 系统检测到模型试图引用不存在的文献来源（越界编号：{invalid_citations}），已触发安全拦截，请重新提问。")
+            yield ("done", None)
+            return
+
+        # 4. Guardrails 校验
         guard_result = self.guardrails.verify(full_answer, sources)
 
         yield ("sources", sources)

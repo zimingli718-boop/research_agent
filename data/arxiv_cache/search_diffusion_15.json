@@ -1,0 +1,288 @@
+{
+  "query": "diffusion",
+  "results": [
+    {
+      "id": "2611.12880v1",
+      "title": "Kolmogorov-Chapman Maps: Trajectory-Free Learning for Simulating Molecular Dynamics",
+      "authors": [
+        "Majdi Hassan",
+        "Marta Skreta",
+        "Dominique Beaini",
+        "Kirill Neklyudov"
+      ],
+      "abstract": "Stochastic differential equations (SDEs) describe stochastic processes across a wide range of scientific domains, including physics, biology, and finance. Although individual numerical integration steps are inexpensive, observing meaningful events or transitions can require millions of sequential steps, resulting in substantial wall-clock simulation time and poor hardware utilization. Deep learning offers an alternative by amortizing many integration steps into a single neural network forward pass, potentially enabling much faster simulation. However, existing supervised approaches typically require long simulated trajectory data, which restricts their applicability. In this work, we introduce Kolmogorov-Chapman Maps (KC-Maps), a method for learning the transition kernel of an SDE that relies only on the trajectory-free marginal samples together with the known drift and diffusion coefficients. Given an initial time and state of a process, KC-Maps models its distribution integrated to any given time, corresponding to the weak solution of the SDE. To recover the correct dynamics, KC-Maps satisfies two key properties: (i) it satisfies the boundary conditions, which we incorporate directly into the neural network architecture, and (ii) it respects the Kolmogorov--Chapman equation, which provides an efficient training objective. We empirically demonstrate that KC-Maps learns to integrate the dynamics of peptide molecular systems and outperforms classical molecular dynamics in terms of GPU-hours.",
+      "published": "2026-11-09T18:59:13Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12880v1",
+      "categories": [
+        "cs.LG"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12880v1"
+    },
+    {
+      "id": "2611.12852v1",
+      "title": "What kills $v$-prediction? A Patch-wise PCA Perspective on Pixel-Space Flow Matching",
+      "authors": [
+        "Tianze Luo",
+        "Haofeng Huang",
+        "Yuan Yao"
+      ],
+      "abstract": "Latent Diffusion Models dominate generative modeling but face two-stage training complexity and the inherent reconstruction limits of pre-trained autoencoders. Pixel-space Flow Matching offers a simplified end-to-end alternative yet often encounters training difficulties when using the standard $v$-prediction objective. Recent research attributes this difficulty to the off-manifold nature of noised targets, motivating a shift toward $x$-prediction. In this paper, we investigate this explanation through patch-wise Principal Component Analysis (PCA) and identify a bandwidth bottleneck. The velocity in minor components is largely determined by the raw noisy input, requiring deep backbones to preserve information that competes with principal-component modeling. Through controlled experiments and representation analysis, we further examine why $x$-prediction remains effective: its parameterization provides a raw-input bypass, while its learned input representation can spontaneously concentrate on principal directions. Under low-rank observations, our analysis of the induced flow characterizes $x$-prediction as an implicit conditional-mean decoder, reconstructing discarded components from the retained information. These observations motivate the Raw-injected Transformer (RiT), which combines a lightweight raw-conditioned decoder with an output-side shortcut to separate semantic modeling from raw-state propagation. Our method restores effective $v$-prediction and achieves competitive performance on ImageNet $256\\times256$, providing a perspective on the interaction between prediction objectives and architectural bandwidth.",
+      "published": "2026-11-09T18:44:37Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12852v1",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12852v1"
+    },
+    {
+      "id": "2611.12806v1",
+      "title": "Learning Heterogeneous Tactile Representation for General Dexterous Manipulation",
+      "authors": [
+        "Bing Han",
+        "Yichuan Peng",
+        "Haoyu Dong",
+        "Yuanmeng Hu",
+        "Yongyi Jia",
+        "Fangjing Wang",
+        "Kecheng Zheng",
+        "Yiming Zhang",
+        "Yanhong Zeng",
+        "Xiaoqing Zhang",
+        "Chen Song",
+        "Rundong Zou",
+        "Anqi Dong",
+        "Yuan Guan",
+        "Ka Leong Cheng",
+        "Xing Zhu",
+        "Yujun Shen",
+        "Nan Xue",
+        "Wei Ning"
+      ],
+      "abstract": "Tactile sensing is an indispensable modality for contact-rich dexterous manipulation, a capability that hints at the ultimate frontiers of embodied intelligence. However, commercially available tactile sensors are still at a relatively early stage of development, with each type of sensor offering irreplaceable strengths alongside its own drawbacks. A key challenge is thus to free tactile understanding from sensor-specific physics, so that embodied models can effectively leverage heterogeneous tactile data. To this end, we develop LingBot-Touch, a tactile foundation model characterized by the following properties. (i) Our model yields a unified representation across different tactile sensors (i.e., piezoresistive, magnetic, and visuotactile sensors), and is easily extensible to new sensor types. (ii) The resulting tactile tokens are plug-and-play: they can be seamlessly integrated into policy models across paradigms, from diffusion policy to vision-language-action (VLA) models such as $π_{0.5}$ and LingBot-VLA, consistently enhancing manipulation dexterity. (iii) Extensive experiments, spanning simulation and real-robot deployments across multiple hardware platforms, demonstrate that our tactile representation substantially benefits complex manipulation tasks while maintaining strong computational efficiency. We believe the findings in this work demonstrate the potential of leveraging cross-sensor data to scale tactile learning, and offer encouraging insights for the design of future hardware and embodied models.",
+      "published": "2026-11-09T18:12:00Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12806v1",
+      "categories": [
+        "cs.RO"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12806v1"
+    },
+    {
+      "id": "2611.12797v1",
+      "title": "The Radicalization Pipeline: Characterizing and Predicting Online Misogyny",
+      "authors": [
+        "Anna Bertani",
+        "Nathan Ratkiewicz",
+        "Alessandro Flammini",
+        "Filippo Menczer"
+      ],
+      "abstract": "Social media platforms are known to shape and polarize user opinions and, increasingly, facilitate pathways toward ideological extremism. Among these trends, online misogynistic communities associ- ated with the incel (involuntary celibate) ideology have received growing scholarly attention. Previous work has primarily focused on ideological narratives and linguistic content within incel communities them- selves. However, much less is known about how user behaviors evolve over time, particularly before and after their engagement with incel spaces, and whether early signals can anticipate such transitions. In this study, we conduct a longitudinal analysis of Reddit users who participated in the r/incels community on Reddit. Our results show that engagement with the incel community is associated with a substantial in- crease in toxicity in both posts and comments, while hate increases particularly in posts after engagement. These changes extend beyond explicitly ideological communities: users who engage with the r/incels sub- reddit display elevated toxicity and hate speech even in subreddits related to leisure, entertainment, and everyday interests. In parallel, user activity shifts away from recreational and support-oriented communi- ties toward subreddits focused on social issues, indicating a broader reorientation of online participation. Finally, we show that future incel users can be identified with high accuracy prior to engagement using supervised machine learning models trained on linguistic, contextual, and interaction-based features. These findings suggest that online misogynistic radicalization follows detectable behavioral trajectories and diffuses across the broader social media ecosystem.",
+      "published": "2026-11-09T18:03:06Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12797v1",
+      "categories": [
+        "cs.SI"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12797v1"
+    },
+    {
+      "id": "2611.12791v1",
+      "title": "Large Language Models as a Universal Searcher for Open-World Automated Machine Learning",
+      "authors": [
+        "Yuxuan Hu",
+        "Jihao Liu",
+        "Weikang Shi",
+        "Xijie Huang",
+        "Linda Wei",
+        "Mingjie Zhan",
+        "Aojun Zhou",
+        "Rui Liu",
+        "Hongsheng Li"
+      ],
+      "abstract": "Developing effective machine learning models requires complex manual tuning, while current Automated Machine Learning (AutoML) frameworks remain domain-specific and isolate model architecture, training hyperparameter, and data ratio optimization. Here, we bridge this gap by proposing a universal, large language model (LLM)-based AutoML framework that jointly optimizes these configurations for the first time without the need for task-specific fine-tuning. We propose NCode, a unified numerical encoding scheme that translates diverse AutoML design choices into universal discrete sequences and effectively reframes the optimization process as a unified ranking task. Trained solely on optimization trajectories derived from a limited, single-domain vision task, the proposed LLM-based searcher demonstrates impressive cross-task, cross-modality and joint search-space optimization generalizability, achieving state-of-the-art performance across image classification, image segmentation, speaker verification and text-to-image benchmarks. Crucially, it exhibits superior scalability in the large-scale training and joint optimization of a billion-parameter Diffusion Transformer, requiring 896 GPU-days and attaining a state-of-the-art GenEval score of 0.91. By leveraging reinforcement learning to instill Chain-of-Thought reasoning, we provide a systematic way to interpret the LLM-based searcher's internal decision-making mechanisms, revealing its optimization strategy shifted from the early-stage diversity-driven exploration to the late-stage anchor exploitation. Our proposed framework provides a scalable, generalizable, and interpretable pathway toward general-purpose open-world machine learning optimization.",
+      "published": "2026-11-09T17:58:38Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12791v1",
+      "categories": [
+        "cs.CL"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12791v1"
+    },
+    {
+      "id": "2611.12739v1",
+      "title": "Plant Orbiter: 3D Plant Reconstruction and Generation with Video Diffusion Orbit Cameras and 3D Gaussian Splatting",
+      "authors": [
+        "Zane K. J. Hartley",
+        "Yong En Kok",
+        "Lewis A. G. Stuart",
+        "Andrew P. French",
+        "Michael P. Pound"
+      ],
+      "abstract": "Modern digital phenotyping pipelines require the precise measurement of a range of 3D morphological plant traits. The accurate, high throughput acquisition of these traits helps breeders and researchers accelerate the development of new varieties, techniques and products. Recent advances in 3D technologies have enabled a rapid transition from 2D to 3D pipelines, but high throughput acquisition of digital 3D twins of plants remains a significant challenge due to complex morphology, thin structures and occlusions. In this paper we present Plant Orbiter, a new approach to generating 3D plants that leverages recent advances in video diffusion to produce high quality 3D Gaussian Splats of plants from a single image. We show that our method more accurately recreates plant morphology than other state-of-the-art methods, achieving the highest 3D F-score against all baselines, while being more practical for high throughput pipelines due to easier alignment and reduced cost of camera placement. Combined with a 2D diffusion model, we show that our method also achieves state-of-the-art results in the generation of 3D plant models from a text prompt.",
+      "published": "2026-11-09T17:22:19Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12739v1",
+      "categories": [
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12739v1"
+    },
+    {
+      "id": "2611.12735v1",
+      "title": "Catalysis-induced phase separation of enzymes via diffusivity contrast",
+      "authors": [
+        "Marie Jardat",
+        "Jacques Fries",
+        "Vincent Dahirel",
+        "Jaime Agudo-Canalejo",
+        "Pierre Illien"
+      ],
+      "abstract": "Catalysis can drive phase separation by coupling local chemical composition to molecular transport, even in the absence of attractive interactions. Here, we demonstrate such catalysis-induced phase separation in a microscopic particle-based model of enzymes catalyzing the interconversion of substrate and product molecules with different diffusivities. We derive an analytical instability criterion in the dilute limit, showing that a homogeneous mixture becomes unstable when the nonequilibrium chemical drive and the diffusivity contrast are sufficiently large, and the substrate and product concentration exceeds a threshold set by the enzyme volume. Brownian-dynamics simulations confirm the predicted instability and reveal macroscopic coexistence of enzyme-rich and enzyme-poor phases, including in regimes where equilibrium depletion interactions cannot account for demixing. Finally, we show that, upon eliminating the fast chemical degrees of freedom, the reactive ternary mixture maps onto an effective binary mixture nonreciprocal interactions. Our results establish an explicit microscopic mechanism for catalysis-induced phase separation and connect chemically driven phase separation to the physics of motility-regulated and nonreciprocal matter.",
+      "published": "2026-11-09T17:20:11Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12735v1",
+      "categories": [
+        "cond-mat.soft",
+        "physics.bio-ph",
+        "physics.chem-ph"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12735v1"
+    },
+    {
+      "id": "2611.12603v1",
+      "title": "Direct Conditioning of Audio Diffusion Transformers on fMRI Reveals Cortical Contributions to Sound Reconstruction",
+      "authors": [
+        "Matteo Ciferri",
+        "Tonio Weidler",
+        "Matteo Ferrante",
+        "Nicola Toschi",
+        "Elia Formisano"
+      ],
+      "abstract": "Reconstructing audio from brain activity remains challenging. Existing brain-to-audio pipelines typically map neural responses to predefined stimulus representations before synthesis. While recent work in the visual domain has explored direct conditioning on brain activity, this approach has not yet been extended to audio diffusion models. We introduce MAAS (Multi-Area Auditory Synthesis), an end-to-end framework that conditions a pretrained audio diffusion transformer on ROI-wise fMRI responses without first supervising a decoder to predict an external stimulus representation. MAAS uses region-specific projections and learned brain tokens to condition Stable Audio through a dedicated cross-attention pathway. On a 7T fMRI dataset, we demonstrate consistent improvements over baselines, including two-stage fMRI-to-latent conditioning, across both acoustic and semantic evaluation metrics. In addition, we introduce a fidelity metric grounded in a computational model of auditory neural processing, which allows us to quantify the contribution of individual auditory cortical regions to reconstructed audio representations.",
+      "published": "2026-11-09T15:48:02Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12603v1",
+      "categories": [
+        "cs.SD",
+        "cs.CV"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12603v1"
+    },
+    {
+      "id": "2611.12566v1",
+      "title": "Quantum benchmarks for magnetic energies and transition temperatures",
+      "authors": [
+        "Mojtaba Alaei",
+        "Ilia Mikhailov",
+        "Alireza Qaiumzadeh",
+        "Artem Oganov"
+      ],
+      "abstract": "Predicting magnetic ordering temperatures requires accurate exchange interactions and an appropriate treatment of spin thermodynamics. Here we assess these requirements through complementary quantum Monte Carlo benchmarks. For five insulating antiferromagnets, we compare ferromagnetic-antiferromagnetic energy differences from diffusion Monte Carlo (DMC) and density functional theory with references reconstructed from inelastic neutron scattering (INS) exchanges. DMC underestimates these references but achieves a mean absolute error comparable to the best-performing functionals tested. Separately, we directly test the previously proposed (S+1)/S rescaling of classical Monte Carlo temperatures against quantum stochastic series expansion simulations for 17 compounds using corresponding INS-derived Heisenberg Hamiltonians. Rescaling reduces the mean absolute classical-quantum temperature difference from 81.7 to 8.2 K, with a mean absolute percentage difference of 5.9 %. These results establish a direct quantum benchmark for the rescaling within the tested models and emphasize that improvements in electronic magnetic energy scales should be accompanied by attention to quantum spin thermodynamics.",
+      "published": "2026-11-09T15:29:13Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12566v1",
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12566v1"
+    },
+    {
+      "id": "2611.12532v1",
+      "title": "ML Models Are Not Ciphers: Power Analysis for Weight Extraction Is Harder Than You Think",
+      "authors": [
+        "Mohammed Qaiss",
+        "Peter Horvath",
+        "Michal Shagam",
+        "Lejla Batina",
+        "Zhuoran Liu",
+        "Eyal Ronen",
+        "Mahmood Sharif",
+        "Yuval Yarom"
+      ],
+      "abstract": "Can power-analysis techniques reveal secret weights of machine-learning models? Multiple recent works demonstrate proof-of-concept attacks that can partially recover such weights. To that end, these works build on techniques from cryptographic engineering, treating the model as a ``cipher'' and its secret weights as keys.   We question the basic assumption behind such straightforward adaptations of cryptographic attacks and highlight the challenges arising when applying past techniques to fully recover all layers of deep neural networks. Unlike past works, which extract only a few weights, typically from shallow layers, we investigate the recovery of complete networks. Moreover, we target fully trained and functional models, rather than untrained, randomly initialized networks. To focus on fundamental challenges, we assume an unrealistically strong side-channel adversary that can directly observe the output of the leakage model without any added noise. With this adversary, we show that machine-learning models differ significantly from cryptographic implementations, giving rise to unique challenges that have not been observed in the prior art.   We observe two main differences between machine-learning models and ciphers. First, in contrast to the high-diffusion nonlinear integer arithmetic prevalent in cryptographic schemes, machine-learning models tend to use limited-precision floating-point arithmetic and low-diffusion linear operations. We show that these operations introduce difficulties in weight recovery, often requiring an unexpectedly large number of traces, even under ideal channel conditions. Second, we observe that, unlike ciphers, which aim to increase the data entropy, machine-learning models aim to reduce it. This reduces data variability as the algorithm progresses, hampering weight recovery in deep layers of the model.   (details can be found in the paper)",
+      "published": "2026-11-09T15:06:45Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12532v1",
+      "categories": [
+        "cs.CR"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12532v1"
+    },
+    {
+      "id": "2611.12527v1",
+      "title": "WaveGen: Truly End-to-End Waveform Generation via Internal Spectral Trajectory Learning",
+      "authors": [
+        "Sang-Hoon Lee",
+        "Ha-Yeong Choi"
+      ],
+      "abstract": "This work proposes WaveGen, a fully end-to-end diffusion-based text-to-waveform framework based on Spectral Forcing, which jointly learns an internal spectral trajectory and the target waveform trajectory within a single model, enabling direct end-to-end text-to-waveform generation. Unlike recent TTS pipelines, WaveGen does not rely on separately trained or externally decoded intermediate representations, such as neural audio codecs, Mel-spectrogram vocoders, or VAE-based latent models. In addition, WaveGen performs internal text-speech alignment within a single model, eliminating the need for external alignment modules such as duration predictors. To preserve a truly end-to-end formulation, our framework further avoids dependence on self-supervised representations, such as BERT-based text embeddings and Wav2Vec 2.0-based semantic representations, as well as semantic distillation methods for training optimization. To achieve this, we carefully design Spectral Forcing, a model architecture with disentangled diffusion heads, and a training objective based on a multi-scale spectral $v$-loss. We further validate the scalability of end-to-end TTS models by scaling the model size from 0.1B to 0.6B parameters. Using a single architecture, open-source data, and one-stage training, without external modules such as duration predictor or REPA, WaveGen demonstrates fully end-to-end waveform generation achieving state-of-the-art performance on the Emilia training dataset. In particular, WaveGen achieves a WER of 1.47 and a SIM of 0.75 on the Seed-en benchmark. Source code and checkpoints are available at https://github.com/sh-lee-prml/WaveGen",
+      "published": "2026-11-09T15:02:29Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12527v1",
+      "categories": [
+        "cs.SD",
+        "cs.AI",
+        "eess.AS",
+        "eess.SP"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12527v1"
+    },
+    {
+      "id": "2611.12523v1",
+      "title": "Existence of a non-zero steady-state solution to a population density equation subject to horizontal transfer",
+      "authors": [
+        "Mateo Deangeli Bravo"
+      ],
+      "abstract": "From plasmid dynamics and efflux pump expression in bacteria to risk-taking behaviour in human groups, horizontal interactions can drive the transmission of deleterious traits that spread despite carrying no selective advantage, thereby burdening the population. How can such detrimental traits persist, and under what conditions can the population avoid extinction?  To address these questions, we model a population structured by a continuous trait representing individual burden within a non-linear, non-local integro-differential framework. From an analytical perspective, mutations are modeled via a jump operator rather than a diffusion term; consequently, the mutation operator lacks regularizing properties and is generally non-self-adjoint. Moreover, working in a weighted L 1 setting precludes the direct application of standard Krein-Rutman theory. To overcome these hurdles, we construct a custom fixed-point operator by first freezing the non-linearities to solve an auxiliary eigenvalue problem, and then tuning the resulting principal eigenvalue. Applying the Leray-Schauder fixed-point theorem to this operator rigorously yields the existence of a non-trivial steady state. Finally, numerical simulations illustrate the qualitative dynamics of the model and delineate the parameter regimes governing population persistence and extinction.",
+      "published": "2026-11-09T14:59:25Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12523v1",
+      "categories": [
+        "math.AP",
+        "q-bio.PE"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12523v1"
+    },
+    {
+      "id": "2611.12465v1",
+      "title": "Giant Diffusion at Flocking Transitions",
+      "authors": [
+        "Sohini Chatterjee",
+        "Wasim Akram",
+        "Subir K. Das"
+      ],
+      "abstract": "We simulate dynamics in two-dimensional aligning active-matter models exhibiting order-disorder transitions in the velocity field. Analysis reveals that the single-particle diffusivity, $D_s$, exhibits strong enhancements at criticality which we quantify via a finite-size scaling method. This dynamical behavior at nonequilibrium flocking transitions is fundamentally different from that at the criticality of equilibrium systems, where diffusivities either vanish or remain non-critical. Furthermore, $D_s$ exhibits pronounced finite-size effects throughout the ordered phase, which also are absent in equilibrium settings. We interpret these counterintuitive transport anomalies within the framework of a flocking theory. Our results suggest that enhanced diffusion generates effective long-range interactions. This relaxes the constraints of the Mermin-Wagner theorem that otherwise prevents order-disorder transitions in two dimensions for systems possessing continuous symmetry. These results are of much experimental relevance and have important implications in formulating quantitative theories for nonequilibrium transports.",
+      "published": "2026-11-09T14:14:26Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12465v1",
+      "categories": [
+        "cond-mat.stat-mech"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12465v1"
+    },
+    {
+      "id": "2611.12431v1",
+      "title": "Mechanisms of Zener diode and ohmic contact resulting from a heavily doped p-n junction: A novel explanation in terms of impurity-photovoltaic-effect resulting from infrared self-emission at room-temperature",
+      "authors": [
+        "Jianming Li"
+      ],
+      "abstract": "In textbooks, a quantum-mechanical tunneling mechanism based on electron-wavefunction is used to explain Zener diode as well as ohmic contact resulting from a heavily doped p-n junction. In this study, an attempt in particle description is made to explain these devices. Any object at room-temperature emits infrared (IR) photons. The process of heavy doping can cause many defects. The self-absorption of the IR emission could be achieved through sub-band-gap excitations due to defects, creating carriers. In a heavily doped p-n junction device, some of the IR-generated carriers diffuse into the junction which has a built-in field. The built-in field sweeps out the carriers, creating IR photocurrent. The reverse leakage current of the p-n junction is regarded as the IR photocurrent according to a precedent where impurity-photovoltaic-effect is used to explain circuit devices (arXiv:2510.18226). Heavy doping results in not only a great many IR-generated carriers but also an avalanche effect at low voltage, producing Zener breakdown. Additionally, the impurity-photovoltaic-effect can make a reasonable contribution to explaining the temperature dependence of Zener breakdown. If the doping is very heavy, the heavily doped p-n junction can be altered to create an ohmic contact, which can also be explained in terms of impurity-photovoltaic-effect. Not only quantum mechanics, but also this photovoltaic mechanism in particle description can explain the above devices. Considering the wave-particle duality, the combination of quantum-mechanical and photovoltaic mechanisms is suggested to explain these devices. Each mechanism plays a big or small role in the explanation.",
+      "published": "2026-11-09T13:55:55Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12431v1",
+      "categories": [
+        "physics.app-ph"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12431v1"
+    },
+    {
+      "id": "2611.12430v1",
+      "title": "Sensitivity of diffusion MRI to white matter pathology: a comparison between ROI-based effect size and TBSS analysis under different diffusion protocols, field strengths and post-processing strategies",
+      "authors": [
+        "Evgenios N. Kornaropoulos",
+        "Theodor Rumetshofer",
+        "Anna Gard",
+        "Linda Knutsson",
+        "Niklas Marklund",
+        "Pia C. Sundgren",
+        "Markus Nilsson"
+      ],
+      "abstract": "We investigated how much more advanced diffusion MRI acquisitions and more complex processing increase sensitivity to group-wise white matter (WM) differences due to pathology, and how the choice of statistical analysis affects this sensitivity. Data were acquired with DTI and DKI protocols at 3T and 7T in patients with systemic lupus erythematosus (SLE), athletes with persistent post-concussive symptoms (PPCS), and healthy controls (HC). Seven processing pipelines combining denoising, Gibbs removal, eddy current and motion correction, and Gaussian smoothing were applied. Sensitivity was assessed with two methods: a region-of-interest-based (ROI-based) effect size analysis over 72 WM tracts segmented by TractSeg, quantified by Cohen's d, and tract-based spatial statistics (TBSS), quantified by the fraction of significant voxels in the WM skeleton. The ROI-based analysis found significant group differences for both SLE versus HC and PPCS versus HC, whereas TBSS found differences only for SLE versus HC. Both analyses agreed that the diffusion protocol affected sensitivity more than field strength or post-processing. Regardless of pipeline, DTI-derived fractional anisotropy (FA) yielded a 0.26 higher effect size and 25% more significantly different voxels between SLE and HC than DKI-derived FA, and 3T yielded a 0.2 higher effect size and 21% more significant voxels than 7T. Smoothing reduced sensitivity in both analyses (by up to 12% in TBSS for SLE versus HC). Overall, TBSS appears less suited to localized pathology such as neurotrauma, whereas the ROI-based analysis showed no bias with respect to the nature of the pathology. Advanced protocols such as 3T-DKI and 7T-DTI may need further optimization before surpassing conventional 3T-DTI in sensitivity to WM pathology in SLE.",
+      "published": "2026-11-09T13:55:20Z",
+      "pdf_url": "https://arxiv.org/pdf/2611.12430v1",
+      "categories": [
+        "physics.med-ph"
+      ],
+      "abs_url": "https://arxiv.org/abs/2611.12430v1"
+    }
+  ]
+}
